@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.knowledge.body.AddKnowledgeReq;
 import com.knowledge.domain.Response;
@@ -12,6 +13,7 @@ import com.knowledge.entity.BasicInfo;
 import com.knowledge.repo.AddKnowledgeRepo;
 import com.knowledge.service.AddKnowledgeService;
 
+@Service
 public class AddKnowledgeServiceImpl  implements AddKnowledgeService{
  
 	@Autowired

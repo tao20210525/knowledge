@@ -1,0 +1,64 @@
+server:
+  port: 8091
+  
+
+# 数据库配置
+spring: 
+  profiles: dev
+  application:
+    name: charging
+  datasource:
+      name: devdb
+      url: jdbc:mysql://localhost:3306/knowledge?characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: root123
+      driver-class-name: com.mysql.jdbc.Driver
+      filters: stat
+      maxActive: 20
+      initialSize: 1
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 'CHA' FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      hikari: 
+        read-only: false
+        connection-timeout: 60000
+        idle-timeout: 60000
+        validation-timeout: 3000
+        max-lifetime: 6000
+        login-timeout: 5
+        maximum-pool-size: 60
+        minimum-idle: 10
+  # jpa
+  jpa: 
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate: 
+      properties: 
+      hibernate: 
+          #打印执行时间统计信息
+          generate_statistics: true
+          jdbc:
+            #每批500条提交
+            batch_size: 1000
+            batch_versioned_data: true
+            order_inserts: true
+            order_updates: true
+      ddl-auto: none
+      naming: 
+        physical-strategy:  org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+
+# 注册中心配置
+eureka: 
+  instance: 
+    hostname: localhost
+  client: 
+    register-with-eureka: false
+    fetch-registry: false
+
+

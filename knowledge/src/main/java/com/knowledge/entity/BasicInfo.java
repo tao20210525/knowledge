@@ -5,8 +5,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -15,8 +15,7 @@ public class BasicInfo {
 	
 	@Id
 	@Column(name = "ID")
-	@SequenceGenerator(name = "seq_basic_info",sequenceName = "seq_basic_info")
-	@GeneratedValue(generator = "seq_basic_info")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "KNOWLEDGE_NAME")

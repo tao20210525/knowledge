@@ -1,11 +1,18 @@
+server:
+  port: 8091
+  
 
-spring:
+# 数据库配置
+spring: 
+  profiles: tst
+  application:
+    name: knowledge
   datasource:
-    primary:
+      name: devdb
+      url: jdbc:mysql://测试环境数据库地址:3306/knowledge?characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+      username: 测试环境数据库用户名
+      password: 测试环境数据库密码
       driver-class-name: com.mysql.jdbc.Driver
-      username: root
-      password: root123
-      url: jdbc:mysql://localhost:3306/knowledge?characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
       filters: stat
       maxActive: 20
       initialSize: 1
@@ -26,29 +33,30 @@ spring:
         login-timeout: 5
         maximum-pool-size: 60
         minimum-idle: 10
-
-  jpa:
+  # jpa
+  jpa: 
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
-    hibernate:
-      properties:
-        hibernate:
+    hibernate: 
+      properties: 
+      hibernate: 
           #打印执行时间统计信息
           generate_statistics: true
           jdbc:
             #每批500条提交
             batch_size: 1000
             batch_versioned_data: true
-          order_inserts: true
-          order_updates: true
+            order_inserts: true
+            order_updates: true
       ddl-auto: none
       naming: 
         physical-strategy:  org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-           
 
-#打印mysql日志到控制台
-logging: 
-  config: classpath:log4j2_dev.xml
-  level:
-     com.knowledge: debug
-   
+
+# 注册中心配置
+eureka: 
+  instance: 
+    hostname: localhost
+  client: 
+    register-with-eureka: false
+    fetch-registry: false
