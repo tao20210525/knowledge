@@ -18,10 +18,6 @@ public class SubjectRelation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	// 类别
-	@Column(name = "CATEGORY")
-	private String category;
-
 	// 主题域ID
 	@Column(name = "SUBJECT_ID")
 	private Long subjectId;
@@ -48,14 +44,6 @@ public class SubjectRelation {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
 	}
 
 	public Long getSubjectId() {

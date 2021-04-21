@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.knowledge.body.AddMetadataReq;
+import com.knowledge.body.ElementDataReq;
+import com.knowledge.body.MetadataFieldReq;
 import com.knowledge.domain.Response;
 import com.knowledge.service.AddMetadataService;
 
-//新增元数据
 @Controller
 @RequestMapping({"/addMetadata"})
 public class AddMetadataController {
@@ -30,9 +30,10 @@ public class AddMetadataController {
 		return "测试成功";
 	}
 
+	//新增元数据
 	@RequestMapping(value = { "/addData" }, method = { RequestMethod.POST })
 	@ResponseBody
-	public Response saveBasiInfo(@RequestBody AddMetadataReq req) {
+	public Response saveMetadata(@RequestBody ElementDataReq req) {
 
 		try {
 			logger.info("新增元数据-入参-request :{}", JSON.toJSON(req));
@@ -40,10 +41,26 @@ public class AddMetadataController {
 			return addMetadataService.saveMetadata(req);
 
 		} catch (Exception e) {
-			logger.info("saveKnowledge----error", e);
+			logger.info("saveMetadata----error", e);
 			return Response.error("99", "系统开小差了,请稍后再试~");
 		}
 	}
 	
+	
+	//新增元数据组
+	@RequestMapping(value = { "/addMetadataField" }, method = { RequestMethod.POST })
+	@ResponseBody
+	public Response saveMetadataField(@RequestBody MetadataFieldReq req) {
+
+		try {
+			logger.info("新增元数据组-入参-request :{}", JSON.toJSON(req));
+
+			return addMetadataService.saveMetadataField(req);
+
+		} catch (Exception e) {
+			logger.info("saveMetadataField----error", e);
+			return Response.error("99", "系统开小差了,请稍后再试~");
+		}
+	}
 	
 }

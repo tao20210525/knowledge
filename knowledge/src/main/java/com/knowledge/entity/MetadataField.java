@@ -22,10 +22,6 @@ public class MetadataField {
 	@Column(name = "CATEGORY")
 	private String category;
 
-	// 主题域ID
-	@Column(name = "SUBJECT_ID")
-	private Long subjectId;
-
 	// 元数据组名称
 	@Column(name = "NAME")
 	private String name;
@@ -52,14 +48,6 @@ public class MetadataField {
 
 	public void setCategory(String category) {
 		this.category = category;
-	}
-
-	public Long getSubjectId() {
-		return subjectId;
-	}
-
-	public void setSubjectId(Long subjectId) {
-		this.subjectId = subjectId;
 	}
 
 	public String getName() {

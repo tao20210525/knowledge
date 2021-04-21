@@ -1,15 +1,16 @@
 package com.knowledge.body;
 
-import java.sql.Date;
-
 //新增元数据的请求入参
-public class AddMetadataReq {
+public class ElementDataReq {
 
 	//类别
 	private String category;
 	
 	//主题域名称
 	private String subjectName;
+	
+	//主题域ID
+   private Long subjectId;
 	
 	//字段中文名
 	private String name;
@@ -23,11 +24,11 @@ public class AddMetadataReq {
 	//输入类型：1.单行文本、2.单选下拉框、3.多选下拉框、4.时间组件、5.文本编辑器、6.附件
 	private String inputType;
 	
-	//创建人
-	private String createBy;
+   //枚举值code
+	private String code;
 	
-	//创建时间
-	private Date createdTime;
+	//枚举值value
+	private String value;
 
 	public String getCategory() {
 		return category;
@@ -43,6 +44,14 @@ public class AddMetadataReq {
 
 	public void setSubjectName(String subjectName) {
 		this.subjectName = subjectName;
+	}
+	
+	public Long getSubjectId() {
+		return subjectId;
+	}
+
+	public void setSubjectId(Long subjectId) {
+		this.subjectId = subjectId;
 	}
 
 	public String getName() {
@@ -77,20 +86,20 @@ public class AddMetadataReq {
 		this.inputType = inputType;
 	}
 
-	public String getCreateBy() {
-		return createBy;
+	public String getCode() {
+		return code;
 	}
 
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
-	public Date getCreatedTime() {
-		return createdTime;
+	public String getValue() {
+		return value;
 	}
 
-	public void setCreatedTime(Date createdTime) {
-		this.createdTime = createdTime;
+	public void setValue(String value) {
+		this.value = value;
 	}
-	
+
 }
