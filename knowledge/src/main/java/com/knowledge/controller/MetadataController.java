@@ -16,10 +16,10 @@ import com.knowledge.domain.Response;
 import com.knowledge.service.AddMetadataService;
 
 @Controller
-@RequestMapping({"/addMetadata"})
-public class AddMetadataController {
+@RequestMapping({"/metaData"})
+public class MetadataController {
 	
-	private Logger logger = LoggerFactory.getLogger(AddMetadataController.class);
+	private Logger logger = LoggerFactory.getLogger(MetadataController.class);
 	
 	@Autowired
 	 private AddMetadataService addMetadataService;
