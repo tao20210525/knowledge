@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "BASICINFO")
+@Table(name = "BASICINFO")  //基本信息
 public class BasicInfo {
 	
 	@Id

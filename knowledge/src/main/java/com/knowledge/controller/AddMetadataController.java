@@ -10,35 +10,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.knowledge.body.AddKnowledgeReq;
+import com.knowledge.body.AddMetadataReq;
 import com.knowledge.domain.Response;
-import com.knowledge.service.AddKnowledgeService;
+import com.knowledge.service.AddMetadataService;
 
-//新增知识
+//新增元数据
 @Controller
-@RequestMapping({"/addKnowledge"})
-public class AddKnowledgeController {
+@RequestMapping({"/addMetadata"})
+public class AddMetadataController {
 	
-	private Logger logger = LoggerFactory.getLogger(AddKnowledgeController.class);
+	private Logger logger = LoggerFactory.getLogger(AddMetadataController.class);
 	
 	@Autowired
-	 private AddKnowledgeService addKnowledgeService;
+	 private AddMetadataService addMetadataService;
 	
 	@ResponseBody
 	@RequestMapping({ "/online" })
 	public String callTest() {
 		return "测试成功";
 	}
-	
-	
-	@RequestMapping(value = { "/save" }, method = { RequestMethod.POST })
+
+	@RequestMapping(value = { "/addData" }, method = { RequestMethod.POST })
 	@ResponseBody
-	public Response saveKnowledge(@RequestBody AddKnowledgeReq req) {
+	public Response saveBasiInfo(@RequestBody AddMetadataReq req) {
 
 		try {
-			logger.info("新增知识-入参-request :{}", JSON.toJSON(req));
+			logger.info("新增元数据-入参-request :{}", JSON.toJSON(req));
 
-			return addKnowledgeService.saveKnowledge(req);
+			return addMetadataService.saveMetadata(req);
 
 		} catch (Exception e) {
 			logger.info("saveKnowledge----error", e);
@@ -47,8 +46,4 @@ public class AddKnowledgeController {
 	}
 	
 	
-	
-	
-	
-
 }
