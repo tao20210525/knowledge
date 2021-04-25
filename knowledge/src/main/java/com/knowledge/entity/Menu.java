@@ -10,23 +10,31 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "METADATA_FIELD") // 元数据组表
-public class MetadataField {
+@Table(name = "MENU") // 菜单栏表
+public class Menu {
 
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	// 类别
-	@Column(name = "CATEGORY")
-	private String category;
-
-	// 元数据组名称
+	
+	// 类型：1.知识库 2.元数据
+	@Column(name = "TYPE")
+	private String type;
+	
+	// 类别名称
 	@Column(name = "NAME")
 	private String name;
 	
-	//级别：1.一级 2.二级 3.三级 4.四级
+	// 父级类别
+	@Column(name = "PARENT_CODE")
+	private String parentCode;
+	
+	//类别枚举
+	@Column(name = "CODE")
+	private String code;
+	
+	//类别级别：1.一级 2.二级 3.三级 4.四级
 	@Column(name = "LEVEL")
 	private String level;
 
@@ -82,20 +90,12 @@ public class MetadataField {
 		this.id = id;
 	}
 
-	public String getCategory() {
-		return category;
+	public String getType() {
+		return type;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getCreateBy() {
@@ -114,6 +114,30 @@ public class MetadataField {
 		this.createdTime = createdTime;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getParentCode() {
+		return parentCode;
+	}
+
+	public void setParentCode(String parentCode) {
+		this.parentCode = parentCode;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 	public String getLevel() {
 		return level;
 	}
@@ -122,5 +146,4 @@ public class MetadataField {
 		this.level = level;
 	}
 	
-
 }

@@ -41,6 +41,10 @@ public class ElementData {
 	// 输入类型：1.单行文本、2.单选下拉框、3.多选下拉框、4.时间组件、5.文本编辑器、6.附件
 	@Column(name = "INPUT_TYPE")
 	private String inputType;
+	
+	//级别：1.一级 2.二级 3.三级 4.四级
+	@Column(name = "LEVEL")
+	private String level;
 
 	// 创建人
 	@Column(name = "CREATE_BY")
@@ -140,6 +144,14 @@ public class ElementData {
 
 	public void setInputType(String inputType) {
 		this.inputType = inputType;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
 	}
 
 	public String getCreateBy() {

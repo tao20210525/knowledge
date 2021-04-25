@@ -29,6 +29,10 @@ public class SubjectField {
 	// 知识标题
 	@Column(name = "KNOWLEDGE_TITLE")
 	private String knowledgeTitle;
+	
+	//级别：1.一级 2.二级 3.三级 4.四级
+	@Column(name = "LEVEL")
+	private String level;
 
 	// 创建人
 	@Column(name = "CREATE_BY")
@@ -120,6 +124,14 @@ public class SubjectField {
 
 	public void setCreatedTime(Date createdTime) {
 		this.createdTime = createdTime;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
 	}
 
 }

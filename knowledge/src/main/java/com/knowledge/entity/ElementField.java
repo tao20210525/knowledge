@@ -29,6 +29,8 @@ public class ElementField {
 	// 级别
 	@Column(name = "LEVEL")
 	private String level;
+	
+	
 
 	// 创建人
 	@Column(name = "CREATE_BY")

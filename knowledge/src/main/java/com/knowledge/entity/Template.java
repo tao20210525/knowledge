@@ -10,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "METADATA_FIELD") // 元数据组表
-public class MetadataField {
+@Table(name = "TEMPLATE") // 模板基本表
+public class Template {
 
 	@Id
 	@Column(name = "ID")
@@ -21,10 +21,6 @@ public class MetadataField {
 	// 类别
 	@Column(name = "CATEGORY")
 	private String category;
-
-	// 元数据组名称
-	@Column(name = "NAME")
-	private String name;
 	
 	//级别：1.一级 2.二级 3.三级 4.四级
 	@Column(name = "LEVEL")
@@ -90,12 +86,12 @@ public class MetadataField {
 		this.category = category;
 	}
 
-	public String getName() {
-		return name;
+	public String getLevel() {
+		return level;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setLevel(String level) {
+		this.level = level;
 	}
 
 	public String getCreateBy() {
@@ -113,14 +109,5 @@ public class MetadataField {
 	public void setCreatedTime(Date createdTime) {
 		this.createdTime = createdTime;
 	}
-
-	public String getLevel() {
-		return level;
-	}
-
-	public void setLevel(String level) {
-		this.level = level;
-	}
-	
 
 }

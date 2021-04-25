@@ -10,25 +10,25 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "METADATA_FIELD") // 元数据组表
-public class MetadataField {
+@Table(name = "TEMPLATE_RELATIONSHIP") // 模板关系表
+public class TemplateRelationship {
 
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	// 类别
-	@Column(name = "CATEGORY")
-	private String category;
-
-	// 元数据组名称
-	@Column(name = "NAME")
-	private String name;
 	
-	//级别：1.一级 2.二级 3.三级 4.四级
-	@Column(name = "LEVEL")
-	private String level;
+	//模板子ID
+	@Column(name = "TEMPLATE_ID")
+	private Long templateId;
+	
+	// 类型：1.元数据 2.元数据组 3.主题域
+	@Column(name = "TYPE")
+	private String type;
+	
+	//类型id：1.元数据 2.元数据组 3.主题域
+	@Column(name = "TYPE_ID")
+	private Long typeId;
 
 	// 创建人
 	@Column(name = "CREATE_BY")
@@ -82,20 +82,28 @@ public class MetadataField {
 		this.id = id;
 	}
 
-	public String getCategory() {
-		return category;
+	public Long getTemplateId() {
+		return templateId;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setTemplateId(Long templateId) {
+		this.templateId = templateId;
 	}
 
-	public String getName() {
-		return name;
+	public String getType() {
+		return type;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Long getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(Long typeId) {
+		this.typeId = typeId;
 	}
 
 	public String getCreateBy() {
@@ -113,14 +121,5 @@ public class MetadataField {
 	public void setCreatedTime(Date createdTime) {
 		this.createdTime = createdTime;
 	}
-
-	public String getLevel() {
-		return level;
-	}
-
-	public void setLevel(String level) {
-		this.level = level;
-	}
-	
 
 }

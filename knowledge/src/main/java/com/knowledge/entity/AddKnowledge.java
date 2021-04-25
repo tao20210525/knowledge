@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-//暂时无用
 @Entity
 @Table(name = "ADD_KNOWLEDGE") // 知识信息表
 public class AddKnowledge {
