@@ -9,8 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+//暂时无用
 @Entity
-@Table(name = "ADD_KNOWLEDGE") // 新增知识
+@Table(name = "ADD_KNOWLEDGE") // 知识信息表
 public class AddKnowledge {
 
 	@Id
@@ -41,6 +42,43 @@ public class AddKnowledge {
 	// 创建时间
 	@Column(name = "CREATED_TIME")
 	private Date createdTime;
+	
+	// 创建人
+	@Column(name = "UPDATE_BY")
+	private String updateBy;
+
+	// 创建时间
+	@Column(name = "UPDATE_TIME")
+	private Date updateTime;
+	
+	// 是否删除：空/0：否 1：是
+	@Column(name = "IS_DELETE")
+	private String isDelete;
+	
+
+	public String getUpdateBy() {
+		return updateBy;
+	}
+
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public String getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(String isDelete) {
+		this.isDelete = isDelete;
+	}
 
 	public Long getId() {
 		return id;

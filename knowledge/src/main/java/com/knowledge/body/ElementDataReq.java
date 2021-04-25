@@ -2,6 +2,9 @@ package com.knowledge.body;
 
 //新增元数据的请求入参
 public class ElementDataReq {
+	
+	//元数据id
+	private Long id;
 
 	//类别
 	private String category;
@@ -29,6 +32,15 @@ public class ElementDataReq {
 	
 	//枚举值value
 	private String value;
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getCategory() {
 		return category;

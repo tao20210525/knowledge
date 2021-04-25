@@ -1,6 +1,7 @@
 package com.knowledge.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -33,6 +34,7 @@ public class SubjectFieldServiceImpl  implements SubjectFieldService{
 	public Response saveSubjectField(SubjectFieldReq req) {
 		
 		SubjectField subject = new SubjectField();
+		
 		//类别
 		subject.setCategory(req.getCategory());
 		//主题域名称
@@ -63,6 +65,21 @@ public class SubjectFieldServiceImpl  implements SubjectFieldService{
 			subjectRelationRepo.save(subjectRelation);
 		}
 		return Response.ok("00","新增主题域成功");
+	}
+
+	
+	/**
+	 * 查询主题域信息
+	 * 
+	 */
+	@Override
+	public List<SubjectField> querySubjectField() {
+		
+		List<SubjectField> list = subjectFieldRepo.getSubjectField();
+		if(null == list || list.isEmpty()) {
+			return null;
+		}
+		return list;
 	}
 	
 }

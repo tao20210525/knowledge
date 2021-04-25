@@ -30,7 +30,7 @@ public class MetadataController {
 		return "测试成功";
 	}
 
-	//新增元数据
+	//新增or修改元数据
 	@RequestMapping(value = { "/addData" }, method = { RequestMethod.POST })
 	@ResponseBody
 	public Response saveMetadata(@RequestBody ElementDataReq req) {
@@ -45,7 +45,6 @@ public class MetadataController {
 			return Response.error("99", "系统开小差了,请稍后再试~");
 		}
 	}
-	
 	
 	//新增元数据组
 	@RequestMapping(value = { "/addMetadataField" }, method = { RequestMethod.POST })
