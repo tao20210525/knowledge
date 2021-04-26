@@ -18,19 +18,19 @@ import com.knowledge.entity.ElementEnumeration;
 import com.knowledge.entity.ElementField;
 import com.knowledge.entity.MetadataField;
 import com.knowledge.entity.SubjectRelation;
-import com.knowledge.repo.AddMetadataRepo;
 import com.knowledge.repo.ElementEnumerationRepo;
 import com.knowledge.repo.ElementFieldRepo;
 import com.knowledge.repo.MetadataFieldRepo;
+import com.knowledge.repo.MetadataRepo;
 import com.knowledge.repo.SubjectRelationRepo;
-import com.knowledge.service.AddMetadataService;
+import com.knowledge.service.MetadataService;
 
 @Service
-public class AddMetadataServiceImpl  implements AddMetadataService{
+public class MetadataServiceImpl  implements MetadataService{
  
 
 	@Autowired
-	 private AddMetadataRepo addMetadataRepo;
+	 private MetadataRepo addMetadataRepo;
 	
 	@Autowired
 	 private ElementEnumerationRepo elementEnumerationRepo;
@@ -44,6 +44,20 @@ public class AddMetadataServiceImpl  implements AddMetadataService{
 	@Autowired
 	 private SubjectRelationRepo subjectRelationRepo;
 	
+	
+	/**
+	 * 查询元数据信息
+	 * 
+	 */
+	@Override
+	public List<ElementData> queryMetadata() {
+		
+		List<ElementData> list = addMetadataRepo.getMetadata();
+		if(null == list || list.isEmpty()) {
+			return null;
+		}
+		return list;
+	}
 	
 	/**
 	 * 新增元数据
@@ -138,12 +152,20 @@ public class AddMetadataServiceImpl  implements AddMetadataService{
 				subject.setCreateBy("admin");
 				//创建时间
 				subject.setCreatedTime(new Date());
+				//更新人
+				subject.setUpdateBy("admin");
+				//更新时间
+				subject.setUpdateTime(new Date());
+				//是否逻辑删除 0否 1是
+				subject.setIsDelete("0");
 				
 				subjectRelationRepo.save(subject);
-				
 			}
 		return Response.ok("00","新增元数据成功");
 	}
+	
+	
+	
 	
 	
 	/**

@@ -1,5 +1,7 @@
 package com.knowledge.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,8 @@ import com.alibaba.fastjson.JSON;
 import com.knowledge.body.ElementDataReq;
 import com.knowledge.body.MetadataFieldReq;
 import com.knowledge.domain.Response;
-import com.knowledge.service.AddMetadataService;
+import com.knowledge.entity.ElementData;
+import com.knowledge.service.MetadataService;
 
 @Controller
 @RequestMapping({"/metaData"})
@@ -22,12 +25,30 @@ public class MetadataController {
 	private Logger logger = LoggerFactory.getLogger(MetadataController.class);
 	
 	@Autowired
-	 private AddMetadataService addMetadataService;
+	 private MetadataService metadataService;
 	
 	@ResponseBody
 	@RequestMapping({ "/online" })
 	public String callTest() {
 		return "测试成功";
+	}
+	
+	//查询元数据
+	@RequestMapping(value = { "/queryMetadata" }, method = { RequestMethod.POST })
+	@ResponseBody
+	public Response queryMetadata() {
+
+		try {
+			logger.info("查询元数据--start");
+      
+			List<ElementData> list = metadataService.queryMetadata();
+			
+			return Response.ok("00","查询成功",list);
+
+		} catch (Exception e) {
+			logger.info("saveSubjectField----error", e);
+			return Response.error("99", "系统开小差了,请稍后再试~");
+		}
 	}
 
 	//新增or修改元数据
@@ -38,7 +59,7 @@ public class MetadataController {
 		try {
 			logger.info("新增元数据-入参-request :{}", JSON.toJSON(req));
 
-			return addMetadataService.saveMetadata(req);
+			return metadataService.saveMetadata(req);
 
 		} catch (Exception e) {
 			logger.info("saveMetadata----error", e);
@@ -54,7 +75,7 @@ public class MetadataController {
 		try {
 			logger.info("新增元数据组-入参-request :{}", JSON.toJSON(req));
 
-			return addMetadataService.saveMetadataField(req);
+			return metadataService.saveMetadataField(req);
 
 		} catch (Exception e) {
 			logger.info("saveMetadataField----error", e);

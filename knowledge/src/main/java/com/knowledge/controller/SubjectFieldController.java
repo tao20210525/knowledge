@@ -43,9 +43,9 @@ public class SubjectFieldController {
 	}
 	
 	//查询主题域
-	@RequestMapping(value = { "/querysubjectField" }, method = { RequestMethod.POST })
+	@RequestMapping(value = { "/querySubjectField" }, method = { RequestMethod.POST })
 	@ResponseBody
-	public Response querysubjectField() {
+	public Response querySubjectField() {
 
 		try {
 			logger.info("查询主题域--start");
@@ -59,6 +59,5 @@ public class SubjectFieldController {
 			return Response.error("99", "系统开小差了,请稍后再试~");
 		}
 	}
-	
 	
 }
