@@ -1,5 +1,8 @@
 package com.knowledge.body;
 
+import java.util.List;
+import java.util.Map;
+
 //新增元数据的请求入参
 public class ElementDataReq {
 	
@@ -27,12 +30,10 @@ public class ElementDataReq {
 	//输入类型：1.单行文本、2.单选下拉框、3.多选下拉框、4.时间组件、5.文本编辑器、6.附件
 	private String inputType;
 	
-   //枚举值code
-	private String code;
+	private List<Map<String, String>> enumList;	//enumList示例: [{"code":"1","value":"是"}]
 	
-	//枚举值value
-	private String value;
-	
+	//级别
+	private String level;
 	
 	public Long getId() {
 		return id;
@@ -98,20 +99,20 @@ public class ElementDataReq {
 		this.inputType = inputType;
 	}
 
-	public String getCode() {
-		return code;
+	public String getLevel() {
+		return level;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setLevel(String level) {
+		this.level = level;
 	}
 
-	public String getValue() {
-		return value;
+	public List<Map<String, String>> getEnumList() {
+		return enumList;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setEnumList(List<Map<String, String>> enumList) {
+		this.enumList = enumList;
 	}
 
 }
