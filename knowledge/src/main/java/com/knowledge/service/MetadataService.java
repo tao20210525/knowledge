@@ -4,16 +4,19 @@ import java.util.List;
 
 import com.knowledge.body.ElementDataReq;
 import com.knowledge.body.MetadataFieldReq;
+import com.knowledge.body.vo.MetadataVo;
 import com.knowledge.domain.Response;
-import com.knowledge.entity.ElementData;
 
 public abstract interface MetadataService {
 	
 	/**
-	 * 查询元数据信息
+	 * 查询元数据
 	 * 
+	 * @param category 类别
+	 * @param name 模糊查询
+	 * @return
 	 */
-	List<ElementData> queryMetadata();
+	List<MetadataVo> queryMetadata(String category, String name);
 	
 	/**
 	 * 添加元数据信息

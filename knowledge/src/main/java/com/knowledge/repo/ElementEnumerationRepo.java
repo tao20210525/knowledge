@@ -13,7 +13,8 @@ import com.knowledge.entity.ElementEnumeration;
 public interface ElementEnumerationRepo extends JpaRepository<ElementEnumeration, Long> {
 	
 	
-	@Query("delete * from ElementEnumeration e where e.elementId =:elementId")
+	@Query(value="delete * from ElementEnumeration e where e.elementId =:elementId", nativeQuery=true)
 	List<ElementEnumeration> deleteByElementId(@Param("elementId") Long elementId);
 
+	
 }

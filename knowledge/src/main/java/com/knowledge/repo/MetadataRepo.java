@@ -22,11 +22,4 @@ public interface MetadataRepo extends JpaRepository<ElementData, Long> {
 	List<ElementData> getElementDataInfo(@Param("id") String id);
 	
 	
-	/**
-	 * 查询元数据信息
-	 * @return
-	 */
-	@	Query("select * from ElementData")
-	List<ElementData> getMetadata();
-
 }
