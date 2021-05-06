@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.knowledge.body.ElementDataReq;
 import com.knowledge.body.MetadataFieldReq;
+import com.knowledge.body.vo.MetadataVo;
 import com.knowledge.domain.Response;
 import com.knowledge.entity.ElementData;
 import com.knowledge.entity.ElementEnumeration;
@@ -23,6 +24,7 @@ import com.knowledge.repo.ElementFieldRepo;
 import com.knowledge.repo.MetadataFieldRepo;
 import com.knowledge.repo.MetadataRepo;
 import com.knowledge.repo.SubjectRelationRepo;
+import com.knowledge.repo.dao.MetadataDao;
 import com.knowledge.service.MetadataService;
 
 @Service
@@ -44,15 +46,21 @@ public class MetadataServiceImpl  implements MetadataService{
 	@Autowired
 	 private SubjectRelationRepo subjectRelationRepo;
 	
+	@Autowired
+	 private MetadataDao metadataDao;
+	
 	
 	/**
-	 * 查询元数据信息
+	 * 查询元数据
 	 * 
+	 * @param category 类别
+	 * @param name 模糊查询
+	 * @return
 	 */
 	@Override
-	public List<ElementData> queryMetadata() {
+	public List<MetadataVo> queryMetadata(String category, String name) {
 		
-		List<ElementData> list = addMetadataRepo.getMetadata();
+		List<MetadataVo> list = metadataDao.getMetadata(category,name);
 		if(null == list || list.isEmpty()) {
 			return null;
 		}

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.knowledge.body.ElementDataReq;
 import com.knowledge.body.MetadataFieldReq;
+import com.knowledge.body.vo.MetadataVo;
 import com.knowledge.domain.Response;
-import com.knowledge.entity.ElementData;
 import com.knowledge.service.MetadataService;
 
 @Controller
@@ -33,15 +33,21 @@ public class MetadataController {
 		return "测试成功";
 	}
 	
-	//查询元数据
+	/**
+	 * 查询元数据
+	 * 
+	 * @param category 类别
+	 * @param name 模糊查询
+	 * @return
+	 */
 	@RequestMapping(value = { "/queryMetadata" }, method = { RequestMethod.POST })
 	@ResponseBody
-	public Response queryMetadata() {
+	public Response queryMetadata(@RequestBody ElementDataReq req) {
 
 		try {
 			logger.info("查询元数据--start");
       
-			List<ElementData> list = metadataService.queryMetadata();
+			List<MetadataVo> list = metadataService.queryMetadata(req.getCategory(),req.getName());
 			
 			return Response.ok("00","查询成功",list);
 
