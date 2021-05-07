@@ -4,6 +4,8 @@ import java.util.List;
 
 public class TemplateElementGroupVo {
 	
+	//元素类型 1:元数据 2:元数据组
+	private String type;
 	//元数据组名称
 	private String metadataName;
 	//元数据组ID
@@ -36,6 +38,12 @@ public class TemplateElementGroupVo {
 	}
 	public void setMetadataId(Long metadataId) {
 		this.metadataId = metadataId;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 }

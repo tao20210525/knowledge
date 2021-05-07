@@ -50,6 +50,14 @@ public class TemplateRelationship {
 	@Column(name = "IS_DELETE")
 	private String isDelete;
 
+	//主题域名称
+	@Column(name = "SUBJECT_NAME")
+	private String subjectName;
+	
+	//排序
+	@Column(name = "SORT")
+	private String sort;
+	
 	public String getUpdateBy() {
 		return updateBy;
 	}
@@ -120,6 +128,22 @@ public class TemplateRelationship {
 
 	public void setCreatedTime(Date createdTime) {
 		this.createdTime = createdTime;
+	}
+
+	public String getSubjectName() {
+		return subjectName;
+	}
+
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
 	}
 
 }

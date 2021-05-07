@@ -6,6 +6,10 @@ public class TemplateSubjectVo {
 	
 	//主题域名称
 	private String name;
+	//主题域ID
+	private Long typeId;
+	//排序
+	private String sort;
 	//子集合
 	private List<Object> childList;
 	
@@ -20,6 +24,18 @@ public class TemplateSubjectVo {
 	}
 	public void setChildList(List<Object> childList) {
 		this.childList = childList;
+	}
+	public Long getTypeId() {
+		return typeId;
+	}
+	public void setTypeId(Long typeId) {
+		this.typeId = typeId;
+	}
+	public String getSort() {
+		return sort;
+	}
+	public void setSort(String sort) {
+		this.sort = sort;
 	}
 	
 }

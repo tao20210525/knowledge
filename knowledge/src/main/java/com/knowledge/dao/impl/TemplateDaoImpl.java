@@ -54,7 +54,8 @@ public class TemplateDaoImpl implements TemplateDao {
 		try {
 			List<Object[]> resultList = null;
 			StringBuffer sql = new StringBuffer();
-			sql.append(" SELECT e.id,e.template_id,e.template_relation_id,r.subject_name,e.parent_id,e.level,e.element_type,e.element_id,e.fieldName,e.isnotnull,e.iscanadd,e.sort,e.metadata_id,e.metadata_name ");
+			sql.append(" SELECT e.id,e.template_id,e.template_relation_id,r.subject_name,e.parent_id,e.level,e.element_type,e.element_id,e.fieldName,e.isnotnull,e.iscanadd,e.sort,e.metadata_id,e.metadata_name, ");
+			sql.append(" r.type_id,r.sort subject_sort ");
 			sql.append(" FROM template_relationship r, template_element e ");
 			sql.append(" WHERE e.template_relation_id = r.id AND r.template_id = :templateId AND r.is_delete = '0' AND e.is_delete = '0' ");
 			sql.append(" ORDER BY r.sort,e.level,e.sort ");
@@ -77,8 +78,10 @@ public class TemplateDaoImpl implements TemplateDao {
 					templateInfo.put("isnotnull", null==objArr[9] ? "" : objArr[9].toString());
 					templateInfo.put("iscanadd", null==objArr[10] ? "" : objArr[10].toString());
 					templateInfo.put("sort", null==objArr[11] ? "" : objArr[11].toString());
-					templateInfo.put("metadata_id", null==objArr[12] ? 0L : Long.valueOf(objArr[12].toString()));
+					templateInfo.put("metadata_id", null==objArr[12] ? null : Long.valueOf(objArr[12].toString()));
 					templateInfo.put("metadata_name", null==objArr[13] ? "" : objArr[13].toString());
+					templateInfo.put("subject_type_id", null==objArr[14] ? null : Long.valueOf(objArr[14].toString()));
+					templateInfo.put("subject_sort", null==objArr[15] ? "" : objArr[15].toString());
 					returnList.add(templateInfo);
 				}
 			}

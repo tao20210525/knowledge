@@ -19,8 +19,8 @@ public class Template {
 	private Long id;
 
 	// 类别
-	@Column(name = "CATEGORY")
-	private String category;
+	@Column(name = "TYPE_CODE")
+	private String typeCode;
 	
 	//级别：1.一级 2.二级 3.三级 4.四级
 	@Column(name = "LEVEL")
@@ -78,12 +78,12 @@ public class Template {
 		this.id = id;
 	}
 
-	public String getCategory() {
-		return category;
+	public String getTypeCode() {
+		return typeCode;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setTypeCode(String typeCode) {
+		this.typeCode = typeCode;
 	}
 
 	public String getLevel() {

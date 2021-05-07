@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.knowledge.body.QueryTemplateReq;
+import com.knowledge.body.SaveTemplateReq;
 import com.knowledge.domain.Response;
 import com.knowledge.service.TemplateService;
 
@@ -33,6 +34,18 @@ public class TemplateController {
 	public Response queryTemplate(@RequestBody QueryTemplateReq req){
 		logger.info("查询模板信息-入参-request :{}", JSON.toJSON(req));
 		return templateService.queryTemplate(req);
+	}
+	
+	/**
+	 * 保存模板信息
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value = { "/saveTemplate" }, method = { RequestMethod.POST })
+	@ResponseBody
+	public Response saveTemplate(@RequestBody SaveTemplateReq req){
+		logger.info("保存模板信息-入参-request :{}", JSON.toJSON(req));
+		return templateService.saveTemplate(req);
 	}
 	
 }

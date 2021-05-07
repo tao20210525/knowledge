@@ -2,6 +2,8 @@ package com.knowledge.body.vo;
 
 public class TemplateElementVo {
 	
+	//元素类型 1:元数据 2:元数据组
+	private String type;
 	//元数据名称
 	private String fieldName;
 	//元数据ID
@@ -43,7 +45,11 @@ public class TemplateElementVo {
 	public void setSort(String sort) {
 		this.sort = sort;
 	}
-	
-	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	
 }
