@@ -9,8 +9,9 @@ import com.knowledge.entity.SubjectField;
 public abstract interface SubjectFieldService {
 	
 	/**
-	 * 添加主题域信息
-	 * 
+	 * 新增or修改主题域
+	 * @param req
+	 * @return
 	 */
 	Response saveSubjectField(SubjectFieldReq request);
 	

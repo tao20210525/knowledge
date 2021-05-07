@@ -27,13 +27,19 @@ public class SubjectFieldServiceImpl  implements SubjectFieldService{
 	
 	
 	/**
-	 * 添加主题域信息
+	 * 新增or修改主题域
+	 * @param req
+	 * @return
 	 */
 	@Transactional
 	@Override
 	public Response saveSubjectField(SubjectFieldReq req) {
 		
 		SubjectField subject = new SubjectField();
+		
+	     if(null != req.getElementId()) {  //修改
+	    	 subject = subjectFieldRepo.getOne(req.getElementId());
+         }
 		
 		//类别
 		subject.setCategory(req.getCategory());
@@ -51,6 +57,11 @@ public class SubjectFieldServiceImpl  implements SubjectFieldService{
 		if(null != subject) {
 			//TODO 元数据/主题域关系表
 			SubjectRelation subjectRelation= new SubjectRelation();
+			
+			 if(null != req.getElementId()) {  //修改
+				 subjectRelation = subjectRelationRepo.getOne(req.getElementId());
+	         }
+			
 			//主题域ID
 			subjectRelation.setSubjectId(subject.getId());
 			 //元数据ID
@@ -64,7 +75,7 @@ public class SubjectFieldServiceImpl  implements SubjectFieldService{
 			
 			subjectRelationRepo.save(subjectRelation);
 		}
-		return Response.ok("00","新增主题域成功");
+		return Response.ok("00","新增/修改主题域成功");
 	}
 
 	

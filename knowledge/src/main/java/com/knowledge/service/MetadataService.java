@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.knowledge.body.ElementDataReq;
 import com.knowledge.body.MetadataFieldReq;
+import com.knowledge.body.vo.MetadataFieldVo;
 import com.knowledge.body.vo.MetadataVo;
 import com.knowledge.domain.Response;
 
@@ -24,6 +25,15 @@ public abstract interface MetadataService {
 	 */
 	Response saveMetadata(ElementDataReq request);
 	
+	/**
+	 * 查询元数据组
+	 * 
+	 * @param category 类别
+	 * @param name 模糊查询
+	 * @return
+	 */
+	List<MetadataFieldVo> queryMetadataField(String category, String name);
+
 	
 	/**
 	 * 添加元数据组信息

@@ -26,13 +26,17 @@ public class SubjectFieldController {
 	@Autowired
 	 private SubjectFieldService subjectFieldService;
 	
-	//新增主题域
+	/**
+	 * 新增or修改主题域
+	 * @param req
+	 * @return
+	 */
 	@RequestMapping(value = { "/addsubjectField" }, method = { RequestMethod.POST })
 	@ResponseBody
 	public Response saveSubjectField(@RequestBody SubjectFieldReq req) {
 
 		try {
-			logger.info("新增主题域-入参-request :{}", JSON.toJSON(req));
+			logger.info("新增or修改主题域-入参-request :{}", JSON.toJSON(req));
 
 			return subjectFieldService.saveSubjectField(req);
 

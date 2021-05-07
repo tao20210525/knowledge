@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.knowledge.body.ElementDataReq;
 import com.knowledge.body.MetadataFieldReq;
+import com.knowledge.body.vo.MetadataFieldVo;
 import com.knowledge.body.vo.MetadataVo;
 import com.knowledge.domain.Response;
 import com.knowledge.service.MetadataService;
@@ -34,7 +35,7 @@ public class MetadataController {
 	}
 	
 	/**
-	 * 查询元数据
+	 * 查询元数据(下拉框)-新增元数据组页面/新增主题域页面
 	 * 
 	 * @param category 类别
 	 * @param name 模糊查询
@@ -57,13 +58,17 @@ public class MetadataController {
 		}
 	}
 
-	//新增or修改元数据
+	/**
+	 *  新增or修改元数据
+	 * @param req
+	 * @return
+	 */
 	@RequestMapping(value = { "/addData" }, method = { RequestMethod.POST })
 	@ResponseBody
 	public Response saveMetadata(@RequestBody ElementDataReq req) {
 
 		try {
-			logger.info("新增元数据-入参-request :{}", JSON.toJSON(req));
+			logger.info("新增or修改元数据-入参-request :{}", JSON.toJSON(req));
 
 			return metadataService.saveMetadata(req);
 
@@ -73,13 +78,42 @@ public class MetadataController {
 		}
 	}
 	
-	//新增元数据组
+	
+	/**
+	 * 查询元数据组(下拉框)-新增主题域页面
+	 * 
+	 * @param category 类别
+	 * @param name  模糊查询-元数据组名称
+	 * @return
+	 */
+	@RequestMapping(value = { "/queryMetadataField" }, method = { RequestMethod.POST })
+	@ResponseBody
+	public Response queryMetadataField(@RequestBody ElementDataReq req) {
+
+		try {
+			logger.info("查询元数据组--start");
+      
+			List<MetadataFieldVo> list = metadataService.queryMetadataField(req.getCategory(),req.getName());
+			
+			return Response.ok("00","查询成功",list);
+
+		} catch (Exception e) {
+			logger.info("saveSubjectField----error", e);
+			return Response.error("99", "系统开小差了,请稍后再试~");
+		}
+	}
+	
+	/**
+	 * 新增or修改元数据组
+	 * @param req
+	 * @return
+	 */
 	@RequestMapping(value = { "/addMetadataField" }, method = { RequestMethod.POST })
 	@ResponseBody
 	public Response saveMetadataField(@RequestBody MetadataFieldReq req) {
 
 		try {
-			logger.info("新增元数据组-入参-request :{}", JSON.toJSON(req));
+			logger.info("新增or修改元数据组-入参-request :{}", JSON.toJSON(req));
 
 			return metadataService.saveMetadataField(req);
 

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.knowledge.body.ElementDataReq;
 import com.knowledge.body.MetadataFieldReq;
+import com.knowledge.body.vo.MetadataFieldVo;
 import com.knowledge.body.vo.MetadataVo;
 import com.knowledge.domain.Response;
 import com.knowledge.entity.ElementData;
@@ -75,7 +76,6 @@ public class MetadataServiceImpl  implements MetadataService{
 	public Response saveMetadata(ElementDataReq req) {
 		
 		ElementData elementData = new ElementData();
-		
 		
           if(null != req.getId()) {  //修改
         	  elementData = addMetadataRepo.getOne(req.getId());
@@ -169,10 +169,27 @@ public class MetadataServiceImpl  implements MetadataService{
 				
 				subjectRelationRepo.save(subject);
 			}
-		return Response.ok("00","新增元数据成功");
+		return Response.ok("00","新增/修改元数据成功");
 	}
 	
 	
+	
+	/**
+	 * 查询元数据组(下拉框)-新增主题域页面
+	 * 
+	 * @param category 类别
+	 * @param name 模糊查询-元数据组名称
+	 * @return
+	 */
+	@Override
+	public List<MetadataFieldVo> queryMetadataField(String category, String name) {
+		
+		List<MetadataFieldVo> list = metadataDao.getMetadataField(category,name);
+		if(null == list || list.isEmpty()) {
+			return null;
+		}
+		return list;
+	}
 	
 	
 	
@@ -184,6 +201,10 @@ public class MetadataServiceImpl  implements MetadataService{
 	public Response saveMetadataField(MetadataFieldReq req) {
 		
 		MetadataField metadataField = new MetadataField();
+		
+		 if(null != req.getElementId()) {  //修改
+			 metadataField = metadataFieldRepo.getOne(req.getElementId());
+         }
 		//类别
 		metadataField.setCategory(req.getCategory());
 		//元数据组名称
@@ -196,8 +217,14 @@ public class MetadataServiceImpl  implements MetadataService{
 		metadataFieldRepo.save(metadataField);
 		
 		if(null != metadataField) {
-			//TODO 关系表存入信息
+			//关系表存入信息
 			ElementField field = new ElementField();
+			
+			if(null != req.getElementId()) {
+				//编辑元数据与元数据组关系表
+				field = elementFieldRepo.getOne(req.getElementId());
+			}
+			
 			//元数据组ID
 			field.setMetadataId(metadataField.getId());
 			//元数据ID
@@ -211,8 +238,14 @@ public class MetadataServiceImpl  implements MetadataService{
 			
 			elementFieldRepo.save(field);
 			
-			//TODO 元数据/主题域关系表
+			// 元数据/主题域关系表
 			SubjectRelation subject= new SubjectRelation();
+			
+			if(null != req.getElementId()) {
+				//编辑元数据/主题域关系表
+				subject = subjectRelationRepo.getOne(req.getElementId());
+			}
+			
 			//主题域ID
 			subject.setSubjectId(req.getSubjectId());
 			 //元数据ID
@@ -226,7 +259,7 @@ public class MetadataServiceImpl  implements MetadataService{
 			
 			subjectRelationRepo.save(subject);
 		}
-		return Response.ok("00","新增元数据组成功");
+		return Response.ok("00","新增/修改元数据组成功");
 	}
 
 }

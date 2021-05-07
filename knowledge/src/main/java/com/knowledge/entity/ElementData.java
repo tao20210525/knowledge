@@ -54,11 +54,11 @@ public class ElementData {
 	@Column(name = "CREATED_TIME")
 	private Date createdTime;
 
-	// 创建人
+	// 更新人
 	@Column(name = "UPDATE_BY")
 	private String updateBy;
 
-	// 创建时间
+	// 更新时间
 	@Column(name = "UPDATE_TIME")
 	private Date updateTime;
 
