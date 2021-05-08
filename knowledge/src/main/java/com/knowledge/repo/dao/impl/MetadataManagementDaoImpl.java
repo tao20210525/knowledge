@@ -6,13 +6,16 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.knowledge.body.MetadataManagementReq;
 import com.knowledge.body.vo.MetadataManagementVo;
 import com.knowledge.repo.dao.MetadataManagementDao;
+import com.knowledge.util.PublicUtil;
 
 @Repository
 public class MetadataManagementDaoImpl implements MetadataManagementDao {
@@ -28,22 +31,47 @@ public class MetadataManagementDaoImpl implements MetadataManagementDao {
 	 * 页面列表信息
 	 * @return
 	 */
-	public List<MetadataManagementVo> queryData() {
+	public List<MetadataManagementVo> queryData(MetadataManagementReq req) {
 		List<MetadataManagementVo> metadataList = new ArrayList<MetadataManagementVo>();
 		
 		List<Object[]> list = new ArrayList<Object[]>();
  
 		try {
 			 StringBuffer sql = new StringBuffer();
-			 
-		      sql.append(" select el.id as element_id,el.name as element_name,me.id as metdata_id,me.name as metdata_name,me.category ");
+			  sql.append(" select * from ( ");
+		      sql.append(" select el.id,el.name,el.field_name,el.data_type,el.input_type,el.update_by,el.update_time,'元数据' AS identification ");
 		      sql.append(" from  element_data el ");
-		      sql.append(" left join element_field ef on ef.element_id = el.id ");
-		      sql.append(" left join metadata_field me on me.id = ef.metadata_id where 1=1 ");
-		     
-		    
+		      sql.append(" UNION ");
+		      sql.append(" select me.id,me.name,'' AS field_name,'' AS data_type,'' AS input_type,'' AS update_by,'' AS update_time,'元数据组' AS identification ");
+		      sql.append(" from metadata_field me ");
+		      sql.append(" ) a where 1=1 ");
+		      //to_char(el.update_time ,'yyyymmdd') 
+		      
+		      //页面模糊查询
+		      if(StringUtils.isNotBlank(req.getType()) && StringUtils.isNotBlank(req.getName())) {
+		    	  
+				   //下拉类型 1:元数据/组 2:名称 3:标识 4:数据类型 5:输入类型 6:操作人
+			      String[] type = req.getType().split(",");
+			      sql.append(" and (");
+			      String temp = "";
+		    	  for (int i = 0; i < type.length; i++) {
+		    		  
+		    		  //类型枚举值转换成表里字段名
+		    		  String typeName = PublicUtil.getType(type[i]);
+		    		  
+		    		  temp += "or "+typeName+" like :name ";
+		    	  }
+		    	  if(StringUtils.isNotBlank(temp)) {
+		    		  temp = temp.substring(3);
+		    	  }
+		    	  sql.append(temp+" )");
+		      }
+		      
 		      Query query = this.entityManager.createNativeQuery(sql.toString());
-		   
+		      
+		      if(StringUtils.isNotBlank(req.getType()) && StringUtils.isNotBlank(req.getName())) {
+		    	  query.setParameter("name", "%"+req.getName()+"%");
+		      }
 		      
 		       list = query.getResultList();
 		      
@@ -51,13 +79,20 @@ public class MetadataManagementDaoImpl implements MetadataManagementDao {
 		    	  MetadataManagementVo  vo = new MetadataManagementVo();
 		          Object[] objects = (Object[]) list.get(i);
 
-		      
+		          vo.setId(objects[0] == null ? "" : objects[0].toString());
+		          vo.setName(objects[1] == null ? "" : objects[1].toString());
+		          vo.setFieldName(objects[2] == null ? "" : objects[2].toString());
+		          vo.setDataType(objects[3] == null ? "" : objects[3].toString());
+		          vo.setInputType(objects[4] == null ? "" : objects[4].toString());
+		          vo.setUpdateBy(objects[5] == null ? "" : objects[5].toString());
+		          vo.setUpdateTime(objects[6] == null ? "" : objects[6].toString());
+		          vo.setIdentification(objects[7] == null ? "" : objects[7].toString());
 
 		          metadataList.add(vo);
 		        }
 
 		} catch (Exception e) {
-			this.logger.info("getMetadataField--error", e);
+			this.logger.info("queryData--error", e);
 		}
 		return metadataList;
 	}

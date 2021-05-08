@@ -2,6 +2,7 @@ package com.knowledge.service;
 
 import java.util.List;
 
+import com.knowledge.body.MetadataManagementReq;
 import com.knowledge.body.vo.MetadataManagementVo;
 
 public abstract interface HomePageService {
@@ -13,6 +14,6 @@ public abstract interface HomePageService {
 	 * 页面列表信息
 	 * @return
 	 */
-	List<MetadataManagementVo> queryData();
+	List<MetadataManagementVo> queryData(MetadataManagementReq req);
 	
 }

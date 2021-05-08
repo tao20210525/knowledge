@@ -30,7 +30,6 @@ import com.knowledge.service.MetadataService;
 
 @Service
 public class MetadataServiceImpl  implements MetadataService{
- 
 
 	@Autowired
 	 private MetadataRepo addMetadataRepo;

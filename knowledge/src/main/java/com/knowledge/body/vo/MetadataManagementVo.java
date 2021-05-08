@@ -1,22 +1,21 @@
 package com.knowledge.body.vo;
 
-import java.util.Date;
-
 //首页-元数据管理
 public class MetadataManagementVo {
 	
-	//元数据ID
-	private String elementId;
+	/*
+	 * //元数据ID private String elementId;
+	 * 
+	 * //元数据名称 private String elementName;
+	 * 
+	 * //元数据组ID private String fieldId;
+	 * 
+	 * //元数据组名称 private String metdataName;
+	 */
 	
-	//元数据名称
-	private String elementName;
-	
-	//元数据组ID
-	private String fieldId;
-	
-	//元数据组名称
-	private String metdataName;
-	
+	//元数据/元数据组-ID 
+	private String id;
+	  
 	//标识 0:元数据 1:元数据组
 	private String identification;
 	
@@ -36,38 +35,14 @@ public class MetadataManagementVo {
 	private String updateBy;
 
 	// 更新时间
-	private Date updateTime;
-	
-	public String getFieldId() {
-		return fieldId;
+	private String updateTime;
+
+	public String getId() {
+		return id;
 	}
 
-	public void setFieldId(String fieldId) {
-		this.fieldId = fieldId;
-	}
-
-	public String getElementId() {
-		return elementId;
-	}
-
-	public void setElementId(String elementId) {
-		this.elementId = elementId;
-	}
-
-	public String getElementName() {
-		return elementName;
-	}
-
-	public void setElementName(String elementName) {
-		this.elementName = elementName;
-	}
-
-	public String getMetdataName() {
-		return metdataName;
-	}
-
-	public void setMetdataName(String metdataName) {
-		this.metdataName = metdataName;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getIdentification() {
@@ -118,11 +93,11 @@ public class MetadataManagementVo {
 		this.updateBy = updateBy;
 	}
 
-	public Date getUpdateTime() {
+	public String getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
 

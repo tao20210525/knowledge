@@ -30,8 +30,6 @@ public class ElementField {
 	@Column(name = "LEVEL")
 	private String level;
 	
-	
-
 	// 创建人
 	@Column(name = "CREATE_BY")
 	private String createBy;

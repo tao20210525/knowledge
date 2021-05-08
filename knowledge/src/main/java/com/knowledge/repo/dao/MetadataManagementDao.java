@@ -2,6 +2,7 @@ package com.knowledge.repo.dao;
 
 import java.util.List;
 
+import com.knowledge.body.MetadataManagementReq;
 import com.knowledge.body.vo.MetadataManagementVo;
 
 public  interface MetadataManagementDao {
@@ -13,5 +14,5 @@ public  interface MetadataManagementDao {
 	 * 页面列表信息
 	 * @return
 	 */
-	List<MetadataManagementVo> queryData();
+	List<MetadataManagementVo> queryData(MetadataManagementReq req);
 }

@@ -6,10 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.knowledge.body.MetadataManagementReq;
 import com.knowledge.body.vo.MetadataManagementVo;
 import com.knowledge.domain.Response;
 import com.knowledge.service.HomePageService;
@@ -33,12 +35,12 @@ public class HomePageController {
 	 */
 	@RequestMapping(value = { "/metadataManagement" }, method = { RequestMethod.POST })
 	@ResponseBody
-	public Response queryMetadataManagement() {
+	public Response queryMetadataManagement(@RequestBody MetadataManagementReq req) {
 
 		try {
 			logger.info("首页-元数据管理--start");
       
-			List<MetadataManagementVo> list = homePageService.queryData();
+			List<MetadataManagementVo> list = homePageService.queryData(req);
 			
 			return Response.ok("00","查询成功",list);
 
