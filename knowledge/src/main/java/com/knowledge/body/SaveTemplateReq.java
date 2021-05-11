@@ -16,6 +16,10 @@ public class SaveTemplateReq {
 	private String level;
 	//模板主题域集合
 	private List<TemplateSubjectVo> templateSubjectList;
+	//接口请求处理类型 1:新增 2:更新
+	private String reqType;
+	//模板ID 当reqType=1时当前字段不传,当reqType=2时当前字段必传
+	private Long templateId;
 	
 	public String getTypeCode() {
 		return typeCode;
@@ -34,6 +38,18 @@ public class SaveTemplateReq {
 	}
 	public void setTemplateSubjectList(List<TemplateSubjectVo> templateSubjectList) {
 		this.templateSubjectList = templateSubjectList;
+	}
+	public String getReqType() {
+		return reqType;
+	}
+	public void setReqType(String reqType) {
+		this.reqType = reqType;
+	}
+	public Long getTemplateId() {
+		return templateId;
+	}
+	public void setTemplateId(Long templateId) {
+		this.templateId = templateId;
 	}
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.knowledge.body.QueryTemplateCompositionReq;
 import com.knowledge.body.QueryTemplateReq;
 import com.knowledge.body.SaveTemplateReq;
 import com.knowledge.domain.Response;
@@ -47,5 +48,30 @@ public class TemplateController {
 		logger.info("保存模板信息-入参-request :{}", JSON.toJSON(req));
 		return templateService.saveTemplate(req);
 	}
+	
+	/**
+	 * 查询模板字段
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value = { "/queryTemplateField" }, method = { RequestMethod.POST })
+	@ResponseBody
+	public Response queryTemplateField(@RequestBody QueryTemplateReq req){
+		logger.info("查询模板字段-入参-request :{}", JSON.toJSON(req));
+		return templateService.queryTemplateField(req);
+	}
+	
+	/**
+	 * 查询可组成模板的元素列表
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value = { "/queryTemplateComposition" }, method = { RequestMethod.POST })
+	@ResponseBody
+	public Response queryTemplateComposition(@RequestBody QueryTemplateCompositionReq req){
+		logger.info("查询可组成模板的元素列表-入参-request :{}", JSON.toJSON(req));
+		return templateService.queryTemplateComposition(req);
+	}
+	
 	
 }

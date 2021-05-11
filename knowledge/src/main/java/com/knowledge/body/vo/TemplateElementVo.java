@@ -14,6 +14,8 @@ public class TemplateElementVo {
 	private String isCanAdd;
 	//排序
 	private String sort;
+	//输入类型：1.单行文本、2.单选下拉框、3.多选下拉框、4.时间组件、5.文本编辑器、6.附件
+	private String inputType;
 	
 	public String getFieldName() {
 		return fieldName;
@@ -50,6 +52,12 @@ public class TemplateElementVo {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public String getInputType() {
+		return inputType;
+	}
+	public void setInputType(String inputType) {
+		this.inputType = inputType;
 	}
 	
 }
