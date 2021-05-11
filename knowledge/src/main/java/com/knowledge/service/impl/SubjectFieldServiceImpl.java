@@ -1,7 +1,9 @@
 package com.knowledge.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -37,10 +39,24 @@ public class SubjectFieldServiceImpl  implements SubjectFieldService{
 		
 		SubjectField subject = new SubjectField();
 		
-	     if(null != req.getElementId()) {  //修改
-	    	 subject = subjectFieldRepo.getOne(req.getElementId());
-         }
+		//存入主题域信息
+		List<SubjectField> subjectList = new ArrayList<SubjectField>();
 		
+		//存入主题域关系信息
+		List<SubjectRelation> subjecRelationtList = new ArrayList<SubjectRelation>();
+		
+		for(Map<String, String> enumMap : req.getEnumList()) {
+			//[{"elementId":"1","type":"1","sort":"1"}]
+			Long elementId =  Long.parseLong(enumMap.get("elementId"));
+			String type = enumMap.get("type");
+			String sort = enumMap.get("sort");
+		
+	   //编辑情况下，页面点保存后删除数据，重新保存
+			if(null != req.getId()) {
+				//这里根据主题域id删除信息
+				subjectFieldRepo.deleteById(req.getId());
+			}
+	     
 		//类别
 		subject.setCategory(req.getCategory());
 		//主题域名称
@@ -52,29 +68,40 @@ public class SubjectFieldServiceImpl  implements SubjectFieldService{
 		//创建时间
 		subject.setCreatedTime(new Date());
 		
-		subjectFieldRepo.save(subject);
+		subjectList.add(subject);
+		
+		subjectFieldRepo.saveAll(subjectList);
 		
 		if(null != subject) {
-			//TODO 元数据/主题域关系表
+			//元数据/主题域关系表
 			SubjectRelation subjectRelation= new SubjectRelation();
 			
-			 if(null != req.getElementId()) {  //修改
-				 subjectRelation = subjectRelationRepo.getOne(req.getElementId());
-	         }
+			   //编辑情况下，页面点保存后删除数据，重新保存
+				if(null != req.getId()) {
+					//这里根据主题域id-外键删除信息
+					subjectRelationRepo.deleteBySubjectId(req.getId());
+				}
 			
 			//主题域ID
 			subjectRelation.setSubjectId(subject.getId());
 			 //元数据ID
-			subjectRelation.setElementId(req.getElementId()); 
+			subjectRelation.setElementId(elementId); 
 			//区分数据来源：1.元数据、2.元数据组
-			subjectRelation.setType(req.getType());
+			subjectRelation.setType(type);
+			//排序
+			subjectRelation.setSort(sort);
 			//创建人
 			subjectRelation.setCreateBy("admin");
 			//创建时间
 			subjectRelation.setCreatedTime(new Date());
 			
-			subjectRelationRepo.save(subjectRelation);
+			subjecRelationtList.add(subjectRelation);
+			
+			subjectRelationRepo.saveAll(subjecRelationtList);
 		}
+		
+		}
+		
 		return Response.ok("00","新增/修改主题域成功");
 	}
 

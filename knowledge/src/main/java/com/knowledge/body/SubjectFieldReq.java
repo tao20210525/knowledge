@@ -1,10 +1,13 @@
 package com.knowledge.body;
 
+import java.util.List;
+import java.util.Map;
+
 //新增主题域的请求入参
 public class SubjectFieldReq {
-
-	// 类别
-	private String category;
+	
+	//主题域id
+	private Long id;
 
 	// 主题域名称
 	private String subjectName;
@@ -12,18 +15,18 @@ public class SubjectFieldReq {
 	// 知识标题
 	private String knowledgeTitle;
 
-	// 元数据ID
-	private Long elementId;
+	//类别
+	private String category;
+	
+	//元数据id/类型-数据区分：1.元数据、2.元数据组/排序
+	private List<Map<String, String>> enumList;	//enumList示例: [{"elementId":"1","type":"1","sort":"1"}]
 
-	// 区分数据来源：1.元数据、2.元数据组
-	private String type;
-
-	public String getCategory() {
-		return category;
+	public Long getId() {
+		return id;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getSubjectName() {
@@ -42,20 +45,21 @@ public class SubjectFieldReq {
 		this.knowledgeTitle = knowledgeTitle;
 	}
 
-	public Long getElementId() {
-		return elementId;
+	public List<Map<String, String>> getEnumList() {
+		return enumList;
 	}
 
-	public void setElementId(Long elementId) {
-		this.elementId = elementId;
+	public void setEnumList(List<Map<String, String>> enumList) {
+		this.enumList = enumList;
 	}
 
-	public String getType() {
-		return type;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
+	
 }

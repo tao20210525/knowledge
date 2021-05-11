@@ -46,7 +46,7 @@ public class SubjectFieldController {
 		}
 	}
 	
-	//查询主题域
+	//查询主题域-新增元数据/新增元数据组页面使用
 	@RequestMapping(value = { "/querySubjectField" }, method = { RequestMethod.POST })
 	@ResponseBody
 	public Response querySubjectField() {

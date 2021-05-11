@@ -90,6 +90,8 @@ public class MetadataServiceImpl  implements MetadataService{
 			elementData.setFieldName(req.getFieldName());
 			//数据类型
 			elementData.setDataType(req.getDataType());
+			//级别
+			elementData.setLevel(req.getLevel());
 			//输入类型
 			elementData.setInputType(req.getInputType());
 			//创建人

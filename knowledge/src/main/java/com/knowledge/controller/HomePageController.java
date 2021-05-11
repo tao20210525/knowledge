@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+import com.knowledge.body.MetadataFieldReq;
 import com.knowledge.body.MetadataManagementReq;
 import com.knowledge.body.vo.MetadataManagementVo;
 import com.knowledge.domain.Response;
@@ -24,8 +26,6 @@ public class HomePageController {
 	
 	@Autowired
 	 private HomePageService homePageService;
-	
-	
 	
 	/**
 	 * 首页-元数据管理
@@ -50,5 +50,25 @@ public class HomePageController {
 		}
 	}
 
+	
+	/**
+	 * 修改
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value = { "/update" }, method = { RequestMethod.POST })
+	@ResponseBody
+	public Response saveMetadataField(@RequestBody MetadataFieldReq req) {
+
+		try {
+			logger.info("新增or修改元数据组-入参-request :{}", JSON.toJSON(req));
+
+			return null;
+
+		} catch (Exception e) {
+			logger.info("saveMetadataField----error", e);
+			return Response.error("99", "系统开小差了,请稍后再试~");
+		}
+	}
 	
 }

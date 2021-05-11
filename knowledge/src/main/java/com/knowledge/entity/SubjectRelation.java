@@ -29,6 +29,10 @@ public class SubjectRelation {
 	// 区分数据来源：1.元数据、2.元数据组
 	@Column(name = "TYPE")
 	private String type;
+	
+	// 排序
+	@Column(name = "SORT")
+	private String sort;
 
 	// 创建人
 	@Column(name = "CREATE_BY")
@@ -120,6 +124,14 @@ public class SubjectRelation {
 
 	public void setCreatedTime(Date createdTime) {
 		this.createdTime = createdTime;
+	}
+
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
 	}
 
 }

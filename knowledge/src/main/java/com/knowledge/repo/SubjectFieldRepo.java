@@ -18,5 +18,4 @@ public interface SubjectFieldRepo extends JpaRepository<SubjectField, Long> {
 	@	Query(value="select * from SUBJECT_FIELD", nativeQuery=true)
 	List<SubjectField> getSubjectField();
 	
-	
 }
