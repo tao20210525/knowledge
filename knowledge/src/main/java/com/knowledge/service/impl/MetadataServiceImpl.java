@@ -14,6 +14,7 @@ import com.knowledge.body.ElementDataReq;
 import com.knowledge.body.MetadataFieldReq;
 import com.knowledge.body.vo.MetadataFieldVo;
 import com.knowledge.body.vo.MetadataVo;
+import com.knowledge.dao.MetadataDao;
 import com.knowledge.domain.Response;
 import com.knowledge.entity.ElementData;
 import com.knowledge.entity.ElementEnumeration;
@@ -25,7 +26,6 @@ import com.knowledge.repo.ElementFieldRepo;
 import com.knowledge.repo.MetadataFieldRepo;
 import com.knowledge.repo.MetadataRepo;
 import com.knowledge.repo.SubjectRelationRepo;
-import com.knowledge.repo.dao.MetadataDao;
 import com.knowledge.service.MetadataService;
 
 @Service

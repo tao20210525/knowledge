@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.knowledge.body.SubjectFieldReq;
+import com.knowledge.body.vo.SubjectFieldVo;
 import com.knowledge.domain.Response;
 import com.knowledge.entity.SubjectField;
 import com.knowledge.service.SubjectFieldService;
@@ -25,6 +26,27 @@ public class SubjectFieldController {
 	
 	@Autowired
 	 private SubjectFieldService subjectFieldService;
+	
+	/**
+	 * 查询元数据管理左边菜单栏下所对应的主题域信息
+	 */
+	@RequestMapping(value = { "/querySubjectInfo" }, method = { RequestMethod.POST })
+	@ResponseBody
+	public Response querySubjectInfo(@RequestBody SubjectFieldReq req) {
+		
+		try {
+			logger.info("待定文字-request :{}", JSON.toJSON(req));
+
+	        List<SubjectFieldVo> list = subjectFieldService.querySubjectInfo(req);
+			
+			return Response.ok("00","查询成功",list);
+
+		} catch (Exception e) {
+			logger.info("saveSubjectField----error", e);
+			return Response.error("99", "系统开小差了,请稍后再试~");
+		}
+		
+	}
 	
 	/**
 	 * 新增or修改主题域
@@ -46,7 +68,7 @@ public class SubjectFieldController {
 		}
 	}
 	
-	//查询主题域-新增元数据/新增元数据组页面使用
+	//查询主题域-针对新增元数据/新增元数据组页面
 	@RequestMapping(value = { "/querySubjectField" }, method = { RequestMethod.POST })
 	@ResponseBody
 	public Response querySubjectField() {

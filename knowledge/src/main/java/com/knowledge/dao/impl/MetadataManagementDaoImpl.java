@@ -1,4 +1,4 @@
-package com.knowledge.repo.dao.impl;
+package com.knowledge.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.knowledge.body.MetadataManagementReq;
 import com.knowledge.body.vo.MetadataManagementVo;
-import com.knowledge.repo.dao.MetadataManagementDao;
+import com.knowledge.dao.MetadataManagementDao;
 import com.knowledge.util.PublicUtil;
 
 @Repository
@@ -35,14 +35,16 @@ public class MetadataManagementDaoImpl implements MetadataManagementDao {
 		List<MetadataManagementVo> metadataList = new ArrayList<MetadataManagementVo>();
 		
 		List<Object[]> list = new ArrayList<Object[]>();
+		
+		String category = req.getCategory();
  
 		try {
 			 StringBuffer sql = new StringBuffer();
 			  sql.append(" select * from ( ");
-		      sql.append(" select el.id,el.name,el.field_name,el.data_type,el.input_type,el.update_by,el.update_time,'元数据' AS identification ");
+		      sql.append(" select el.id,el.name,el.field_name,el.data_type,el.input_type,el.update_by,el.update_time,'元数据' AS identification,category ");
 		      sql.append(" from  element_data el ");
 		      sql.append(" UNION ");
-		      sql.append(" select me.id,me.name,'' AS field_name,'' AS data_type,'' AS input_type,'' AS update_by,'' AS update_time,'元数据组' AS identification ");
+		      sql.append(" select me.id,me.name,'' AS field_name,'' AS data_type,'' AS input_type,'' AS update_by,'' AS update_time,'元数据组' AS identification,category ");
 		      sql.append(" from metadata_field me ");
 		      sql.append(" ) a where 1=1 ");
 		      //to_char(el.update_time ,'yyyymmdd') 
@@ -67,10 +69,18 @@ public class MetadataManagementDaoImpl implements MetadataManagementDao {
 		    	  sql.append(temp+" )");
 		      }
 		      
+		      if(StringUtils.isNotBlank(req.getCategory())) {
+		    	  sql.append(" and a.category =:category");
+		      }
+		      
 		      Query query = this.entityManager.createNativeQuery(sql.toString());
 		      
 		      if(StringUtils.isNotBlank(req.getType()) && StringUtils.isNotBlank(req.getName())) {
 		    	  query.setParameter("name", "%"+req.getName()+"%");
+		      }
+		      
+		      if(StringUtils.isNotBlank(req.getCategory())) {
+		    	  query.setParameter("category", category);
 		      }
 		      
 		       list = query.getResultList();

@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.knowledge.body.SubjectFieldReq;
+import com.knowledge.body.vo.SubjectFieldVo;
+import com.knowledge.dao.SubjectFieldDao;
 import com.knowledge.domain.Response;
 import com.knowledge.entity.SubjectField;
 import com.knowledge.entity.SubjectRelation;
@@ -27,6 +29,21 @@ public class SubjectFieldServiceImpl  implements SubjectFieldService{
 	@Autowired
 	 private SubjectFieldRepo subjectFieldRepo;
 	
+	@Autowired
+	 private SubjectFieldDao subjectFieldDao;
+	
+	/**
+	 * 查询元数据管理左边菜单栏下所对应的主题域信息
+	 */
+	@Override
+	public List<SubjectFieldVo> querySubjectInfo(SubjectFieldReq req) {
+		
+		List<SubjectFieldVo> list = subjectFieldDao.getSubjectInfo(req);
+		if(null == list || list.isEmpty()) {
+			return null;
+		}
+		return list;
+	}
 	
 	/**
 	 * 新增or修改主题域
@@ -106,8 +123,9 @@ public class SubjectFieldServiceImpl  implements SubjectFieldService{
 	}
 
 	
+	
 	/**
-	 * 查询主题域信息
+	 * 查询主题域信息(下拉框)--针对新增元数据/新增元数据组页面
 	 * 
 	 */
 	@Override
@@ -119,5 +137,6 @@ public class SubjectFieldServiceImpl  implements SubjectFieldService{
 		}
 		return list;
 	}
+
 	
 }

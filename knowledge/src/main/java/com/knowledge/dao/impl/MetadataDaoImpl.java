@@ -1,4 +1,4 @@
-package com.knowledge.repo.dao.impl;
+package com.knowledge.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.knowledge.body.vo.MetadataFieldVo;
 import com.knowledge.body.vo.MetadataVo;
-import com.knowledge.repo.dao.MetadataDao;
+import com.knowledge.dao.MetadataDao;
 
 @Repository
 public class MetadataDaoImpl implements MetadataDao {

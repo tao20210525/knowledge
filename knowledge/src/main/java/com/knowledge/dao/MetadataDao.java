@@ -1,4 +1,4 @@
-package com.knowledge.repo.dao;
+package com.knowledge.dao;
 
 import java.util.List;
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.knowledge.body.MetadataManagementReq;
 import com.knowledge.body.vo.MetadataManagementVo;
-import com.knowledge.repo.dao.MetadataManagementDao;
+import com.knowledge.dao.MetadataManagementDao;
 import com.knowledge.service.HomePageService;
 
 @Service

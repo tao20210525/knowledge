@@ -38,7 +38,7 @@ public class HomePageController {
 	public Response queryMetadataManagement(@RequestBody MetadataManagementReq req) {
 
 		try {
-			logger.info("首页-元数据管理--start");
+			logger.info("首页-元数据管理--start", JSON.toJSON(req));
       
 			List<MetadataManagementVo> list = homePageService.queryData(req);
 			
@@ -52,16 +52,21 @@ public class HomePageController {
 
 	
 	/**
-	 * 修改
+	 * 首页-元数据管理
+	 * 点击上方主题域信息，出现主题域对应页面列表信息
 	 * @param req
 	 * @return
 	 */
-	@RequestMapping(value = { "/update" }, method = { RequestMethod.POST })
+	@RequestMapping(value = { "/subjectManagement" }, method = { RequestMethod.POST })
 	@ResponseBody
-	public Response saveMetadataField(@RequestBody MetadataFieldReq req) {
+	public Response querySubjectManagement(@RequestBody MetadataManagementReq req) {
 
 		try {
-			logger.info("新增or修改元数据组-入参-request :{}", JSON.toJSON(req));
+			logger.info("首页-元数据管理-主题域-start :{}", JSON.toJSON(req));
+			
+			
+			
+			
 
 			return null;
 
