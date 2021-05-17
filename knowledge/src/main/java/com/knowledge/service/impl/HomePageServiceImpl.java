@@ -31,6 +31,23 @@ public class HomePageServiceImpl  implements HomePageService{
 		}
 		return list;
 	}
+
+	
+	/**
+	 * 首页-元数据管理
+	 * 点击上方主题域信息，出现主题域对应页面列表信息
+	 * @param req
+	 * @return
+	 */
+	@Override
+	public List<MetadataManagementVo> queryInfo(MetadataManagementReq req) {
+		
+		List<MetadataManagementVo> list = metadataManagementDao.queryInfo(req);
+		if(null == list || list.isEmpty()) {
+			return null;
+		}
+		return list;
+	}
  
 
 

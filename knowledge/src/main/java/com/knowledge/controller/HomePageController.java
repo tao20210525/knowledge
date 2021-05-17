@@ -2,6 +2,7 @@ package com.knowledge.controller;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.knowledge.body.MetadataFieldReq;
 import com.knowledge.body.MetadataManagementReq;
 import com.knowledge.body.vo.MetadataManagementVo;
 import com.knowledge.domain.Response;
@@ -45,7 +45,7 @@ public class HomePageController {
 			return Response.ok("00","查询成功",list);
 
 		} catch (Exception e) {
-			logger.info("saveSubjectField----error", e);
+			logger.info("queryMetadataManagement----error", e);
 			return Response.error("99", "系统开小差了,请稍后再试~");
 		}
 	}
@@ -64,14 +64,16 @@ public class HomePageController {
 		try {
 			logger.info("首页-元数据管理-主题域-start :{}", JSON.toJSON(req));
 			
+		     if(StringUtils.isNotBlank(req.getCategory())) {
+		    	 return Response.ok("01","类别不能为空");
+		     }
 			
+			List<MetadataManagementVo> list = homePageService.queryInfo(req);
 			
-			
-
-			return null;
+			return Response.ok("00","查询成功",list);
 
 		} catch (Exception e) {
-			logger.info("saveMetadataField----error", e);
+			logger.info("querySubjectManagement----error", e);
 			return Response.error("99", "系统开小差了,请稍后再试~");
 		}
 	}

@@ -15,4 +15,13 @@ public  interface MetadataManagementDao {
 	 * @return
 	 */
 	List<MetadataManagementVo> queryData(MetadataManagementReq req);
+	
+	
+	/**
+	 * 首页-元数据管理
+	 * 点击上方主题域信息，出现主题域对应页面列表信息
+	 * @param req
+	 * @return
+	 */
+	List<MetadataManagementVo> queryInfo(MetadataManagementReq req);
 }
