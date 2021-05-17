@@ -74,7 +74,7 @@ public class TemplateServiceImpl implements TemplateService {
 							templateSubjectVo.setName(templateElementInfo.get("subject_name").toString());
 							Long typeId = null==templateElementInfo.get("subject_type_id") ? null : Long.valueOf(templateElementInfo.get("subject_type_id").toString());
 							templateSubjectVo.setTypeId(typeId);
-							templateSubjectVo.setSort(templateElementInfo.get("subject_sort").toString());
+							//templateSubjectVo.setSort(templateElementInfo.get("subject_sort").toString());
 							templateSubjectVo.setChildList(new ArrayList<Object>());
 							subjectMap.put(templateRelationId, templateSubjectVo);
 						}
@@ -89,7 +89,7 @@ public class TemplateServiceImpl implements TemplateService {
 								templateElementVo.setElementId(Long.valueOf(templateElementInfo.get("element_id").toString()));
 								templateElementVo.setIsNotNull(templateElementInfo.get("isnotnull").toString());
 								templateElementVo.setIsCanAdd(templateElementInfo.get("iscanadd").toString());
-								templateElementVo.setSort(templateElementInfo.get("sort").toString());
+								//templateElementVo.setSort(templateElementInfo.get("sort").toString());
 								templateSubjectVo.getChildList().add(templateElementVo);
 							}else if("2".equals(elementType)){
 								TemplateElementGroupVo templateElementGroupVo = new TemplateElementGroupVo();
@@ -97,7 +97,7 @@ public class TemplateServiceImpl implements TemplateService {
 								templateElementGroupVo.setMetadataName(templateElementInfo.get("metadata_name").toString());
 								templateElementGroupVo.setMetadataId(Long.valueOf(templateElementInfo.get("metadata_id").toString()));
 								templateElementGroupVo.setElementList(new ArrayList<TemplateElementVo>());
-								templateElementGroupVo.setSort(templateElementInfo.get("sort").toString());
+								//templateElementGroupVo.setSort(templateElementInfo.get("sort").toString());
 								
 								String templateElementGroupId = templateElementInfo.get("id").toString();
 								templateElementGroupMap.put(templateElementGroupId, templateElementGroupVo);
@@ -111,7 +111,7 @@ public class TemplateServiceImpl implements TemplateService {
 							templateElementVo.setElementId(Long.valueOf(templateElementInfo.get("element_id").toString()));
 							templateElementVo.setIsNotNull(templateElementInfo.get("isnotnull").toString());
 							templateElementVo.setIsCanAdd(templateElementInfo.get("iscanadd").toString());
-							templateElementVo.setSort(templateElementInfo.get("sort").toString());
+							//templateElementVo.setSort(templateElementInfo.get("sort").toString());
 							
 							String parentId = templateElementInfo.get("parent_id").toString();
 							TemplateElementGroupVo templateElementGroupVo = templateElementGroupMap.get(parentId);
