@@ -12,6 +12,9 @@ public class ElementDataReq {
 	//类别
 	private String category;
 	
+	//类别名称
+	private String categoryName;
+	
 	//主题域名称
 	private String subjectName;
 	
@@ -116,4 +119,12 @@ public class ElementDataReq {
 		this.enumList = enumList;
 	}
 
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+	
 }

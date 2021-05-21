@@ -20,6 +20,13 @@ public abstract interface MetadataService {
 	List<MetadataVo> queryMetadata(String category, String name);
 	
 	/**
+	 * 查询类别
+	 * 
+	 * @return
+	 */
+	List<MetadataVo> queryCategory();
+	
+	/**
 	 * 添加元数据信息
 	 * 
 	 */
@@ -32,7 +39,7 @@ public abstract interface MetadataService {
 	 * @param name 模糊查询
 	 * @return
 	 */
-	List<MetadataFieldVo> queryMetadataField(String category, String name);
+	List<MetadataFieldVo> queryMetadataField(ElementDataReq req);
 
 	
 	/**

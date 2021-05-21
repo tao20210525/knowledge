@@ -21,6 +21,10 @@ public class ElementData {
 	// 类别
 	@Column(name = "CATEGORY")
 	private String category;
+	
+	// 类别名称
+	@Column(name = "CATEGORY_NAME")
+	private String categoryName;
 
 	// 主题域名称
 	@Column(name = "SUBJECT_NAME")
@@ -168,6 +172,14 @@ public class ElementData {
 
 	public void setCreatedTime(Date createdTime) {
 		this.createdTime = createdTime;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 }

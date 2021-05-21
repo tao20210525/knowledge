@@ -28,12 +28,6 @@ public class MetadataController {
 	@Autowired
 	 private MetadataService metadataService;
 	
-	@ResponseBody
-	@RequestMapping({ "/online" })
-	public String callTest() {
-		return "测试成功";
-	}
-	
 	/**
 	 * 查询元数据(下拉框)-新增元数据组页面/新增主题域页面
 	 * 
@@ -44,7 +38,6 @@ public class MetadataController {
 	@RequestMapping(value = { "/queryMetadata" }, method = { RequestMethod.POST })
 	@ResponseBody
 	public Response queryMetadata(@RequestBody ElementDataReq req) {
-
 		try {
 			logger.info("查询元数据--start");
       
@@ -78,9 +71,30 @@ public class MetadataController {
 		}
 	}
 	
+	/**
+	 * 查询类别--首页左边菜单栏
+	 */
+	@RequestMapping(value = { "/queryCategory" }, method = { RequestMethod.POST })
+	@ResponseBody
+	public Response queryCategory() {
+		try {
+			logger.info("查询类别--start");
+      
+			List<MetadataVo> list = metadataService.queryCategory();
+			
+			return Response.ok("00","查询成功",list);
+
+		} catch (Exception e) {
+			logger.info("queryCategory----error", e);
+			return Response.error("99", "系统开小差了,请稍后再试~");
+		}
+	}
+	
+	
+	
 	
 	/**
-	 * 查询元数据组(下拉框)-新增主题域页面
+	 * 查询元数据组(下拉框)-新增主题域页面/首页列表点击编辑元数据组页面
 	 * 
 	 * @param category 类别
 	 * @param name  模糊查询-元数据组名称
@@ -91,9 +105,9 @@ public class MetadataController {
 	public Response queryMetadataField(@RequestBody ElementDataReq req) {
 
 		try {
-			logger.info("查询元数据组--start");
+			logger.info("查询元数据组-入参-request :{}", JSON.toJSON(req));
       
-			List<MetadataFieldVo> list = metadataService.queryMetadataField(req.getCategory(),req.getName());
+			List<MetadataFieldVo> list = metadataService.queryMetadataField(req);
 			
 			return Response.ok("00","查询成功",list);
 

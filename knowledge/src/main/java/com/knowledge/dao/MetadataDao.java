@@ -2,6 +2,7 @@ package com.knowledge.dao;
 
 import java.util.List;
 
+import com.knowledge.body.ElementDataReq;
 import com.knowledge.body.vo.MetadataFieldVo;
 import com.knowledge.body.vo.MetadataVo;
 
@@ -15,6 +16,14 @@ public  interface MetadataDao {
 	 * @return
 	 */
 	List<MetadataVo> getMetadata(String category, String name);
+	
+	/**
+	 * 查询类别信息
+	 * 
+	 * @param category 类别
+	 * @return
+	 */
+	public List<MetadataVo> queryCategory();
 
 	
 	/**
@@ -24,5 +33,5 @@ public  interface MetadataDao {
 	 * @param name 模糊查询--元数据组名称
 	 * @return
 	 */
-	List<MetadataFieldVo> getMetadataField(String category, String name);
+	List<MetadataFieldVo> getMetadataField(ElementDataReq req);
 }

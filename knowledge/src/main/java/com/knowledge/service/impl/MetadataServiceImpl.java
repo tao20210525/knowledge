@@ -32,7 +32,7 @@ import com.knowledge.service.MetadataService;
 public class MetadataServiceImpl  implements MetadataService{
 
 	@Autowired
-	 private MetadataRepo addMetadataRepo;
+	 private MetadataRepo metadataRepo;
 	
 	@Autowired
 	 private ElementEnumerationRepo elementEnumerationRepo;
@@ -67,6 +67,23 @@ public class MetadataServiceImpl  implements MetadataService{
 		return list;
 	}
 	
+	
+	/**
+	 * 查询类别--首页左边菜单栏
+	 */
+	@Override
+	public List<MetadataVo> queryCategory() {
+		
+		List<MetadataVo> list = metadataDao.queryCategory();
+		
+		if(null == list || list.isEmpty()) {
+			return null;
+		}
+		return list;
+		
+	}
+	
+	
 	/**
 	 * 新增元数据
 	 */
@@ -77,11 +94,13 @@ public class MetadataServiceImpl  implements MetadataService{
 		ElementData elementData = new ElementData();
 		
           if(null != req.getId()) {  //修改
-        	  elementData = addMetadataRepo.getOne(req.getId());
+        	  elementData = metadataRepo.getOne(req.getId());
           }
             //存储元数据
 			//类别
 			elementData.setCategory(req.getCategory());
+			//类别名称
+			elementData.setCategoryName(req.getCategoryName());
 			//主题域名称
 			elementData.setSubjectName(req.getSubjectName());
 			//字段中文名
@@ -105,7 +124,7 @@ public class MetadataServiceImpl  implements MetadataService{
 			//是否逻辑删除 0否 1是
 			elementData.setIsDelete("0");
 			
-			addMetadataRepo.save(elementData);
+			metadataRepo.save(elementData);
 			
 			if(null != elementData) {
 				
@@ -183,15 +202,14 @@ public class MetadataServiceImpl  implements MetadataService{
 	 * @return
 	 */
 	@Override
-	public List<MetadataFieldVo> queryMetadataField(String category, String name) {
+	public List<MetadataFieldVo> queryMetadataField(ElementDataReq req) {
 		
-		List<MetadataFieldVo> list = metadataDao.getMetadataField(category,name);
+		List<MetadataFieldVo> list = metadataDao.getMetadataField(req);
 		if(null == list || list.isEmpty()) {
 			return null;
 		}
 		return list;
 	}
-	
 	
 	
 	/**
@@ -262,5 +280,7 @@ public class MetadataServiceImpl  implements MetadataService{
 		}
 		return Response.ok("00","新增/修改元数据组成功");
 	}
+
+
 
 }

@@ -21,5 +21,4 @@ public interface MetadataRepo extends JpaRepository<ElementData, Long> {
 	@Query("select e from ElementData e where e.id =:id")
 	List<ElementData> getElementDataInfo(@Param("id") String id);
 	
-	
 }
