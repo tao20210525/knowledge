@@ -14,6 +14,7 @@ import com.knowledge.service.RepositoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -35,7 +36,18 @@ public class RepositoryServiceImpl implements RepositoryService {
 
     @Override
     public Response queryRepository(QueryRepositoryReq req) {
-        return null;
+        logger.info("查询知识库信息Service开始");
+        Response response = Response.ok("00", "查询成功");
+        try {
+            List<Map<String, Object>> resultMap = new ArrayList<>();
+            resultMap = knowledgeInfoDao.getKnowledgeInfoList(req.getTypeCode(), req.getLevel(), req.getTitle(), req.getStatus());
+            response.setContent(resultMap);
+        } catch (Exception e) {
+            this.logger.info("查询知识库列表Service异常：" + e);
+            response.setCode("99");
+            response.setMessage("查询知识库列表异常");
+        }
+        return response;
     }
 
     /**
@@ -48,27 +60,35 @@ public class RepositoryServiceImpl implements RepositoryService {
             KnowledgeInfo knowledgeInfo = new KnowledgeInfo();
             KnowledgeInfo info;
 
-            if (null != req.getId()) {  //修改
+            if (null != req.getId()) {  //修改knowledgeInfo
                 knowledgeInfo = knowledgeInfoRepo.getOne(req.getId());
+            }else{
+                knowledgeInfo.setCreateBy("admin");
+                knowledgeInfo.setCreatedTime(new Date());
             }
             knowledgeInfo.setTypeCode(req.getTypeCode());
             knowledgeInfo.setLevel(req.getLevel());
             knowledgeInfo.setStatus(req.getStatus());
             knowledgeInfo.setTitle(req.getTitle());
-            knowledgeInfo.setCreateBy("admin");
-            knowledgeInfo.setCreatedTime(new Date());
             knowledgeInfo.setUpdateBy("admin");
             knowledgeInfo.setUpdateTime(new Date());
             knowledgeInfo.setIsDelete(req.getIsDelete());
             info = knowledgeInfoRepo.save(knowledgeInfo);
-            knowledgeInfo = knowledgeInfoRepo.getOne(info.getId());
-
             List<KnowledgeConsist> knowledgeConsistList = new ArrayList<KnowledgeConsist>();
             List<KnowledgeConsistVo> knowledgeConsistVosList = req.getKnowledgeConsistList();
             if (knowledgeConsistVosList != null && knowledgeConsistVosList.size() > 0) {
+                if (null != req.getId()) {  //修改KnowledgeConsist
+                    KnowledgeConsist knowledgeConsist = new KnowledgeConsist();
+                    knowledgeConsist.setKnowledgeId(req.getId());
+                    knowledgeConsist.setIsDelete("0");
+                    Example<KnowledgeConsist> example = Example.of(knowledgeConsist);
+                    List<KnowledgeConsist> all = knowledgeConsistRepo.findAll(example);
+                    all.stream().forEach(e -> e.setIsDelete("1"));
+                    knowledgeConsistRepo.saveAll(all);
+                }
                 for (KnowledgeConsistVo knowledgeConsistVo : knowledgeConsistVosList) {
                     KnowledgeConsist knowledgeConsist = new KnowledgeConsist();
-                    knowledgeConsist.setKnowledgeId(knowledgeInfo.getId());
+                    knowledgeConsist.setKnowledgeId(info.getId());
                     knowledgeConsist.setSubjectId(req.getSubjectId());
                     knowledgeConsist.setSubjectName(req.getSubjectName());
                     knowledgeConsist.setFieldName(knowledgeConsistVo.getFieldName());
@@ -86,9 +106,9 @@ public class RepositoryServiceImpl implements RepositoryService {
                 knowledgeConsistRepo.saveAll(knowledgeConsistList);
             }
         } catch (Exception e) {
-            throw new KnowledgeException("保存失败");
+            throw new KnowledgeException("操作失败");
         }
-        return Response.ok("00", "添加成功");
+        return Response.ok("00", "操作成功");
     }
 
     @Override
@@ -105,5 +125,10 @@ public class RepositoryServiceImpl implements RepositoryService {
             response.setMessage("查询顶部看板区域异常");
         }
         return response;
+    }
+
+    @Override
+    public Response exportKnowledge(QueryRepositoryReq req) {
+        return null;
     }
 }

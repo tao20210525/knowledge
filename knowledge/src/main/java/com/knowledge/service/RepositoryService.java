@@ -5,6 +5,9 @@ import com.knowledge.body.QueryRepositoryReq;
 import com.knowledge.body.SaveRepositoryReq;
 import com.knowledge.domain.Response;
 
+import java.util.List;
+import java.util.Map;
+
 public interface RepositoryService {
     /**
      * 查询知识库
@@ -26,4 +29,11 @@ public interface RepositoryService {
      * @return
      */
     Response queryMain(QueryRepositoryReq req);
+
+    /**
+     * 导出知识库
+     * @param req
+     * @return
+     */
+    Response exportKnowledge(QueryRepositoryReq req);
 }
