@@ -12,4 +12,5 @@ public interface AuditingDao {
     void updateInfo(List<KnowledgeConsistVo> list, List<KnowledgeConsistVo> newList);
 
     void updateStatus(Long id);
+
 }

@@ -14,6 +14,5 @@ public interface AuditingService {
 
     void updateAuditInfo(List<KnowledgeConsistVo> list, List<KnowledgeConsistVo> newList);
 
-
     void updateAuditStatus(Long id);
 }

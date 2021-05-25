@@ -30,4 +30,5 @@ public class AuditingServiceImpl implements AuditingService {
     public void updateAuditStatus(Long id) {
         auditingDao.updateStatus(id);
     }
+    
 }

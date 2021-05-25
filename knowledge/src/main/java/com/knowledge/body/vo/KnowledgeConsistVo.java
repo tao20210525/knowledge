@@ -26,4 +26,5 @@ public class KnowledgeConsistVo {
 	private String content;
 	@ApiModelProperty("排序")
 	private String sort;
+
 }
