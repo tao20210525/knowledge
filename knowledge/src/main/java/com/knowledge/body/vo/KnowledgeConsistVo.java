@@ -8,6 +8,10 @@ public class KnowledgeConsistVo {
 
 	@ApiModelProperty("知识库id")
 	private String knowledgeId;
+	@ApiModelProperty("主题域id")
+	private String subject_id;
+	@ApiModelProperty("主题域名称")
+	private String subject_name;
 	@ApiModelProperty("知识标题")
 	private String title;
 	@ApiModelProperty("状态")
