@@ -16,6 +16,15 @@ public class TemplateElementVo {
 	private String sort;
 	//输入类型：1.单行文本、2.单选下拉框、3.多选下拉框、4.时间组件、5.文本编辑器、6.附件
 	private String inputType;
+
+	//元数据名称代码
+	private String fieldCode;
+	public String getFieldCode() {
+		return fieldCode;
+	}
+	public void setFieldCode(String fieldCode) {
+		this.fieldCode = fieldCode;
+	}
 	
 	public String getFieldName() {
 		return fieldName;

@@ -86,6 +86,7 @@ public class TemplateServiceImpl implements TemplateService {
 								TemplateElementVo templateElementVo = new TemplateElementVo();
 								templateElementVo.setType("1");
 								templateElementVo.setFieldName(templateElementInfo.get("fieldname").toString());
+								templateElementVo.setFieldCode(templateElementInfo.get("fieldCode").toString());
 								templateElementVo.setElementId(Long.valueOf(templateElementInfo.get("element_id").toString()));
 								templateElementVo.setIsNotNull(templateElementInfo.get("isnotnull").toString());
 								templateElementVo.setIsCanAdd(templateElementInfo.get("iscanadd").toString());
@@ -108,6 +109,7 @@ public class TemplateServiceImpl implements TemplateService {
 							TemplateElementVo templateElementVo = new TemplateElementVo();
 							templateElementVo.setType("1");
 							templateElementVo.setFieldName(templateElementInfo.get("fieldname").toString());
+							templateElementVo.setFieldCode(templateElementInfo.get("fieldCode").toString());
 							templateElementVo.setElementId(Long.valueOf(templateElementInfo.get("element_id").toString()));
 							templateElementVo.setIsNotNull(templateElementInfo.get("isnotnull").toString());
 							templateElementVo.setIsCanAdd(templateElementInfo.get("iscanadd").toString());

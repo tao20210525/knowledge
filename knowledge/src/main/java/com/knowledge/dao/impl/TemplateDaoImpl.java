@@ -56,7 +56,7 @@ public class TemplateDaoImpl implements TemplateDao {
 			List<Object[]> resultList = null;
 			StringBuffer sql = new StringBuffer();
 			sql.append(" SELECT e.id,e.template_id,e.template_relation_id,r.subject_name,e.parent_id,e.level,e.element_type,e.element_id,ed.NAME,e.isnotnull,e.iscanadd,e.sort,e.metadata_id,e.metadata_name, ");
-			sql.append(" r.type_id,r.sort subject_sort,ed.data_type,ed.input_type ");
+			sql.append(" r.type_id,r.sort subject_sort,ed.data_type,ed.input_type,ed.field_name ");
 			sql.append(" FROM template_relationship r, template_element e ");
 			sql.append(" LEFT JOIN element_data ed ON e.ELEMENT_ID = ed.ID ");
 			sql.append(" WHERE e.template_relation_id = r.id AND r.template_id = :templateId AND r.is_delete = '0' AND e.is_delete = '0' ");
@@ -86,6 +86,7 @@ public class TemplateDaoImpl implements TemplateDao {
 					templateInfo.put("subject_sort", null==objArr[15] ? "" : objArr[15].toString());
 					templateInfo.put("data_type", null==objArr[16] ? "" : objArr[16].toString());
 					templateInfo.put("input_type", null==objArr[17] ? "" : objArr[17].toString());
+					templateInfo.put("fieldCode", null==objArr[18] ? "" : objArr[18].toString());
 					returnList.add(templateInfo);
 				}
 			}

@@ -1,6 +1,7 @@
 package com.knowledge.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.knowledge.Exception.KnowledgeException;
 import com.knowledge.body.*;
 import com.knowledge.body.vo.MetadataVo;
 import com.knowledge.constant.ExportConstant;
@@ -93,24 +94,22 @@ public class RepositoryController {
     public void export(HttpServletRequest request, HttpServletResponse response) {
         try {
             Map<String, String[]> parameterMap = request.getParameterMap();
-            QueryRepositoryReq req=new QueryRepositoryReq();
-            req.setTypeCode(parameterMap.get("typeCode").toString());
-            ExcelExportUtil excelExportUtil = new ExcelExportUtil();
-            excelExportUtil.setSheetName("test1");
-            excelExportUtil.setFontSize(ExportConstant.FONTSIZE);
-            excelExportUtil.setHeardList(ExportConstant.HEADER);
-            excelExportUtil.setHeardKey(ExportConstant.HEADERKEY);
-            Response result = repositoryService.exportKnowledge(req);
-            excelExportUtil.setData((List<Map>) result.getContent());
-            excelExportUtil.exportExport(null, response);
+            if (parameterMap.size() == 0) {
+                response.setStatus(201);
+                response.getWriter().println("导出失败！");
+                return;
+            }
+            QueryRepositoryReq req = new QueryRepositoryReq();
+            req.setTypeCode(parameterMap.get("typeCode") == null ? null : parameterMap.get("typeCode")[0]);
+            req.setLevel(parameterMap.get("level") == null ? null : parameterMap.get("level")[0]);
+            req.setStatus(parameterMap.get("status") == null ? null : parameterMap.get("status")[0]);
+            Response result = repositoryService.exportKnowledge(req,response);
             //八进制输出流
             response.setContentType("application/octet-stream");
             //刷新缓冲
             response.flushBuffer();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("导出失败!");
         }
-
     }
-
 }

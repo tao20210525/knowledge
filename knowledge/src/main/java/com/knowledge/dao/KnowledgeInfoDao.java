@@ -23,4 +23,10 @@ public interface KnowledgeInfoDao{
      * @return
      */
     List<Map<String, Object>> getKnowledgeInfoList(String typeCode, String level, String title, String status);
+
+    /**
+     * 根据id查询当前知识库信息
+     * @return
+     */
+    List<Map<String, Object>> getKnowledgeTemplateInfo();
 }
