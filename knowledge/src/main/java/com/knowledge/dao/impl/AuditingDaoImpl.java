@@ -65,18 +65,20 @@ public class AuditingDaoImpl implements AuditingDao {
                     }
                 }
             }
-            for (int r = 0; r < list1.size(); r++) {
-                KnowledgeConsistVo co = list1.get(r);
-                String sql = "update knowledge_consist set CONTENT = ? where subject_id = ? and INPUT_TYPE = ? and ELEMENT_ID = ? and SORT = ? and FIELD_NAME = ? and knowledge_id = ?";
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1,co.getContent());
-                ps.setString(2,co.getSubject_id());
-                ps.setString(3,co.getInputType());
-                ps.setString(4, String.valueOf(co.getElementId()).trim());
-                ps.setString(5,co.getSort());
-                ps.setString(6,co.getFieldName());
-                ps.setString(7,co.getKnowledgeId());
-                ps.executeUpdate();
+            if (list1.size() > 0) {
+                for (int r = 0; r < list1.size(); r++) {
+                    KnowledgeConsistVo co = list1.get(r);
+                    String sql = "update knowledge_consist set CONTENT = ? where subject_id = ? and INPUT_TYPE = ? and ELEMENT_ID = ? and SORT = ? and FIELD_NAME = ? and knowledge_id = ?";
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.setString(1, co.getContent());
+                    ps.setString(2, co.getSubject_id());
+                    ps.setString(3, co.getInputType());
+                    ps.setString(4, String.valueOf(co.getElementId()).trim());
+                    ps.setString(5, co.getSort());
+                    ps.setString(6, co.getFieldName());
+                    ps.setString(7, co.getKnowledgeId());
+                    ps.executeUpdate();
+                }
             }
         } catch (Exception e) {
             log.info("更新失败", e);
@@ -87,7 +89,7 @@ public class AuditingDaoImpl implements AuditingDao {
     public void updateStatus(Long id) {
         Connection conn = null;
         try {
-            String sql = "update knowledge_info set status = 3 where ID = ?";
+            String sql = "update knowledge_info set status = '3' where ID = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, String.valueOf(id).trim());
             ps.executeUpdate();
