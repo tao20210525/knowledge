@@ -65,6 +65,7 @@ public class AuditingDaoImpl implements AuditingDao {
                     }
                 }
             }
+            log.info("审核时更新了知识");
             if (list1.size() > 0) {
                 for (int r = 0; r < list1.size(); r++) {
                     KnowledgeConsistVo co = list1.get(r);
