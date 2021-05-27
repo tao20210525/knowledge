@@ -5,6 +5,8 @@ import com.knowledge.body.QueryRepositoryReq;
 import com.knowledge.body.SaveRepositoryReq;
 import com.knowledge.domain.Response;
 
+import javax.servlet.http.HttpServletResponse;
+
 public interface RepositoryService {
     /**
      * 查询知识库
@@ -26,4 +28,12 @@ public interface RepositoryService {
      * @return
      */
     Response queryMain(QueryRepositoryReq req);
+
+    /**
+     * 导出知识库
+     * @param req
+     * @param response
+     * @return
+     */
+    Response exportKnowledge(QueryRepositoryReq req, HttpServletResponse response);
 }
