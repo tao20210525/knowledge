@@ -69,8 +69,9 @@ public class AuditingDaoImpl implements AuditingDao {
             if (list1.size() > 0) {
                 for (int r = 0; r < list1.size(); r++) {
                     KnowledgeConsistVo co = list1.get(r);
-                    String sql = "update knowledge_consist set CONTENT = ? where subject_id = ? and INPUT_TYPE = ? and ELEMENT_ID = ? and SORT = ? and FIELD_NAME = ? and knowledge_id = ?";
-                    PreparedStatement ps = conn.prepareStatement(sql);
+                    StringBuffer sql = new StringBuffer();
+                    sql.append("update knowledge_consist set CONTENT = ? where subject_id = ? and INPUT_TYPE = ? and ELEMENT_ID = ? and SORT = ? and FIELD_NAME = ? and knowledge_id = ?");
+                    PreparedStatement ps = conn.prepareStatement(sql.toString());
                     ps.setString(1, co.getContent());
                     ps.setString(2, co.getSubject_id());
                     ps.setString(3, co.getInputType());
@@ -90,9 +91,10 @@ public class AuditingDaoImpl implements AuditingDao {
     public void updateStatus(Long id) {
         Connection conn = null;
         try {
-            String sql = "update knowledge_info set status = '3' where ID = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, String.valueOf(id).trim());
+            StringBuffer sql = new StringBuffer();
+            sql.append("update knowledge_info set status = '3' where ID = ?");
+            PreparedStatement ps = conn.prepareStatement(sql.toString());
+            ps.setString(1, String.valueOf(id));
             ps.executeUpdate();
         } catch (Exception e) {
             log.info("发布失败", e);
